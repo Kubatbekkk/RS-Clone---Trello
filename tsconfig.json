@@ -1,5 +1,16 @@
 {
     "compilerOptions": {
+        "lib":
+      [
+       "ES2015",
+        "ES2016",
+        "ES2017",
+        "ES2018",
+        "ES2019",
+        "ES2020",
+        "ESNext",
+        "DOM"
+     ],
         "noEmit": true,
         //Type checking configuration
         "allowUnreachableCode": false,
@@ -12,6 +23,8 @@
         "noUnusedParameters": true,
         "noImplicitAny": true,
         "noImplicitReturns": true,
+        "inlineSourceMap": true,
+        "inlineSources": true,
         //Rules strict
         "alwaysStrict": true,
         "strictBindCallApply": true,
@@ -24,7 +37,7 @@
         "module": "ES2022",
         "moduleResolution": "node",
         //Language and env config
-        "target": "ES2022",
+        "target": "ES6",
         "jsx": "react",
         //Js support config
         "allowJs": true,
