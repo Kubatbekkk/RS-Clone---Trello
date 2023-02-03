@@ -13,7 +13,7 @@ module.exports = {
         new HtmlWebpackPlugin({
             template: "./src/index.html",
         }),
-        new EslintPlugin({ extensions: 'ts' })
+        new EslintPlugin({ extensions: ["ts", "tsx" ]})
 
     ],
     resolve: {
