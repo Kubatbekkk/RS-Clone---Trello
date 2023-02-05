@@ -1,11 +1,13 @@
 {
-    "root": true,
     "env": {
         "es6": true,
         "browser": true,
         "node": true
     },
     "extends": [
+        "react-app",
+        "airbnb",
+        "airbnb-typescript",
         "airbnb-base/legacy",
         "plugin:@typescript-eslint/recommended"
     ],
@@ -21,6 +23,8 @@
     ],
     "rules": {
         "@typescript-eslint/no-var-requires": "off",
+        "comma-dangle": "off",
+        "import/no-extraneous-dependencies": ["error", {"devDependencies": true}],
         "no-undef":"off",
         "no-debugger": "off",
         "no-console": 0,
