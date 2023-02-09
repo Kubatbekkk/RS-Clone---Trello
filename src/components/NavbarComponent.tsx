@@ -5,7 +5,7 @@ import { Container, Nav, Navbar } from 'react-bootstrap';
 
 function NavbarComponent() {
   return (
-    <Navbar fixed='top' bg="primary" variant="dark">
+    <Navbar bg="primary" variant="dark">
       <Container>
         <Navbar.Brand><Link to="/" className='text-warning text-decoration-none'>Trello</Link></Navbar.Brand>
         <Nav className="me-auto align-items-center gap-4">
