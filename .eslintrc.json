@@ -23,8 +23,9 @@
     ],
     "rules": {
         "@typescript-eslint/no-var-requires": "off",
+        "react/require-default-props": "off",
         "comma-dangle": "off",
-        "import/no-extraneous-dependencies": ["error", {"devDependencies": true, "optionalDependencies": true, "peerDependencies": true}],
+        "import/no-extraneous-dependencies": ["error", {"devDependencies": true}],
         "import/prefer-default-export": "off",
         "no-undef":"off",
         "no-debugger": "off",

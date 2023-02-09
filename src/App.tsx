@@ -1,16 +1,14 @@
-/* eslint-disable import/no-extraneous-dependencies */
 import React from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import {
-  Home, NotFoundPage, BoardsPage, LoginPage,
+  Home, NotFoundPage, BoardsPage, LoginPage, SignUpPage,
 } from './pages';
-import { Navbar } from './components';
-import './App.css';
+import { NavbarComponent } from './components';
 
 function App() {
   return (
     <BrowserRouter>
-      <Navbar />
+      <NavbarComponent />
       <Routes>
         {['/', '/home'].map((path) => (
           <Route
@@ -20,6 +18,7 @@ function App() {
         ))}
         <Route path='*' element={<NotFoundPage />} />
         <Route path='/boards' element={<BoardsPage />} />
+        <Route path='/signup' element={<SignUpPage />} />
         <Route path='/login' element={<LoginPage />} />
       </Routes>
     </BrowserRouter>
