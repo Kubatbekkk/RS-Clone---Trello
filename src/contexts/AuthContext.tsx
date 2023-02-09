@@ -11,7 +11,7 @@ import {
 //   updatePassword,
 } from 'firebase/auth';
 import React, {
-  ReactNode, useContext, useEffect, useState,
+  ReactNode, useContext,
 } from 'react';
 
 import { auth } from '../firebase';
