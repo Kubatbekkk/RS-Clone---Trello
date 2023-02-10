@@ -5,7 +5,7 @@ import {
   Home, NotFoundPage, BoardsPage, LoginPage,
   SignUpPage, ProfilePage, PrivateRoute, ForgotPasswordPage,
 } from './pages';
-import { NavbarComponent } from './components';
+import { Footer, NavbarComponent } from './components';
 import { AuthProvider } from './contexts/AuthContext';
 
 function App() {
@@ -44,6 +44,7 @@ function App() {
           />
           <Route path='*' element={<NotFoundPage />} />
         </Routes>
+        <Footer />
       </AuthProvider>
     </BrowserRouter>
   );
