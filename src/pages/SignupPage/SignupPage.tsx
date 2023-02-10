@@ -1,49 +1,52 @@
-import React, { useRef, useState } from 'react';
+/* eslint-disable react/jsx-no-bind */
+/* eslint-disable consistent-return */
+import React, { useState, useRef } from 'react';
 import {
-  Alert,
-  Button, Card, Container, Form,
+  Card, Form, Button, Alert, Container,
 } from 'react-bootstrap';
 import { Link, useNavigate } from 'react-router-dom';
-import { useAuth } from 'src/contexts/AuthContext';
-import useTitle from 'src/hooks/useTitle';
+import { useAuth } from '../../contexts/AuthContext';
 
-function LoginPage() {
-  useTitle('LoginPage');
-
+export default function SignUpPage() {
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
   const emailRef = useRef<HTMLInputElement>(null);
   const passwordRef = useRef<HTMLInputElement>(null);
-  const { login } = useAuth();
+  const passwordConfirmRef = useRef<HTMLInputElement>(null);
+  const { signUp } = useAuth();
+  console.log('signup', typeof signUp);
   const navigate = useNavigate();
 
-  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+  async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
-
+    if (passwordRef.current && passwordConfirmRef.current) {
+      if (passwordRef.current.value !== passwordConfirmRef.current.value) {
+        return setError('Passwords do not match.');
+      }
+    }
     try {
       setError('');
       setLoading(true);
-      await login(emailRef.current!.value, passwordRef.current!.value);
+      await signUp(emailRef.current!.value, passwordRef.current!.value);
       navigate('/');
     } catch (err: unknown) {
       if (err instanceof Error) {
         console.error(err.message);
       }
-      setError('Failed to log in.');
+      setError('Failed to create an account.');
     }
     setLoading(false);
-  };
-
+  }
   return (
     <Container
       className='mt-5 d-flex justify-content-center align-items-center'
 
     >
       <div className='w-50'>
-        <Card className='mt-4 pb-3' style={{ maxWidth: '33rem' }}>
+        <Card className='mt-4 pb-5' style={{ maxWidth: '33rem' }}>
           <Card.Body className='d-flex justify-content-center align-items-center'>
             <div className='w-75'>
-              <h2 className="text-center mb-4">Log In</h2>
+              <h2 className="text-center mb-4">Sign Up</h2>
               {error && <Alert variant="danger">{error}</Alert>}
               <Form onSubmit={handleSubmit}>
                 <Form.Group id="email">
@@ -62,17 +65,22 @@ function LoginPage() {
                   />
 
                 </Form.Group>
+                <Form.Group id="password-confirm">
+                  <Form.Label>Password Confirmation</Form.Label>
+                  <Form.Control
+                    type="password"
+                    ref={passwordConfirmRef}
+                    required
+                  />
+                </Form.Group>
                 <Button disabled={loading} className="w-100 mt-4" type="submit">
-                  Log In
+                  Sign Up
                 </Button>
               </Form>
-              <div className="w-100 text-center mt-3">
-                <Link to="/forgot-password">Forgot Password?</Link>
-              </div>
               <div className="w-100 text-center mt-2">
-                Need an account?
+                Already have an account?
                 {' '}
-                <Link to="/signup"> Sign Up</Link>
+                <Link to="/login"> Log In</Link>
               </div>
             </div>
           </Card.Body>
@@ -82,5 +90,3 @@ function LoginPage() {
     </Container>
   );
 }
-
-export default LoginPage;

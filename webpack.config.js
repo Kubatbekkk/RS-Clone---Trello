@@ -8,40 +8,39 @@ module.exports = {
   mode: 'development',
   output: {
     filename: 'bundle.[fullhash].js',
-    path: path.resolve(__dirname, 'dist')
+    path: path.resolve(__dirname, 'dist'),
   },
   devtool: 'source-map',
   devServer: {
-    historyApiFallback: true
+    historyApiFallback: true,
   },
   plugins: [
     new HtmlWebpackPlugin({
-      template: './src/index.html'
+      template: './src/index.html',
     }),
     new EslintPlugin({ extensions: ['ts', 'tsx'] }),
-    new FaviconsWebpackPlugin('src/assets/favicon.svg')
+    new FaviconsWebpackPlugin('src/assets/favicon.svg'),
   ],
   resolve: {
     modules: [__dirname, 'src', 'node_modules'],
-    extensions: ['*', '.js', '.jsx', '.tsx', '.ts']
+    extensions: ['*', '.js', '.jsx', '.tsx', '.ts'],
   },
   module: {
     rules: [
       {
         test: /\.(js|ts)x?$/,
         exclude: /node_modules/,
-        use: ['babel-loader']
+        use: ['babel-loader'],
       },
       {
-        test: /\.css$/,
-        exclude: /node_modules/,
-        use: ['style-loader', 'css-loader']
+        test: /\.(sass|less|css)$/,
+        use: ['style-loader', 'css-loader', 'sass-loader'],
       },
       {
         test: /\.(png|svg|jpg|gif)$/,
         exclude: /node_modules/,
-        use: ['file-loader']
-      }
-    ]
-  }
+        use: ['file-loader'],
+      },
+    ],
+  },
 };

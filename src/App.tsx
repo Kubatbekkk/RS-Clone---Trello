@@ -1,27 +1,50 @@
-/* eslint-disable import/no-extraneous-dependencies */
+/* eslint-disable react/no-array-index-key */
 import React from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import {
   Home, NotFoundPage, BoardsPage, LoginPage,
+  SignUpPage, ProfilePage, PrivateRoute, ForgotPasswordPage,
 } from './pages';
-import { Navbar } from './components';
-import './App.css';
+import { NavbarComponent } from './components';
+import { AuthProvider } from './contexts/AuthContext';
 
 function App() {
   return (
     <BrowserRouter>
-      <Navbar />
-      <Routes>
-        {['/', '/home'].map((path) => (
+      <AuthProvider>
+        <NavbarComponent />
+        <Routes>
+          {['/', '/home'].map((path, index) => (
+            <Route
+              key={index}
+              path={path}
+              element={<Home />}
+            />
+          ))}
+          <Route path='/signup' element={<SignUpPage />} />
+          <Route path='/login' element={<LoginPage />} />
+          <Route path='/forgot-password' element={<ForgotPasswordPage />} />
+          {/* Private Routes */}
           <Route
-            path={path}
-            element={<Home />}
+            path='/boards'
+            element={(
+              <PrivateRoute>
+                <BoardsPage />
+              </PrivateRoute>
+          )}
           />
-        ))}
-        <Route path='*' element={<NotFoundPage />} />
-        <Route path='/boards' element={<BoardsPage />} />
-        <Route path='/login' element={<LoginPage />} />
-      </Routes>
+
+          <Route
+            path='/profile'
+            element={(
+              <PrivateRoute>
+                <ProfilePage />
+              </PrivateRoute>
+)}
+          />
+          <Route path='*' element={<NotFoundPage />} />
+        </Routes>
+      </AuthProvider>
     </BrowserRouter>
   );
 }
