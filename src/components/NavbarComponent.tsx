@@ -2,8 +2,10 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Container, Nav, Navbar } from 'react-bootstrap';
+import { useAuth } from 'src/contexts/AuthContext';
 
 function NavbarComponent() {
+  const { currentUser } = useAuth();
   return (
     <Navbar bg="primary" variant="dark">
       <Container>
@@ -18,7 +20,7 @@ function NavbarComponent() {
           <Navbar.Text className='text-info'>
             Signed in as:
             {' '}
-            <a href="#login">Mark Otto</a>
+            <Link to="/">{currentUser?.email?.substring(0, currentUser.email.indexOf('@'))}</Link>
           </Navbar.Text>
         </Navbar.Collapse>
       </Container>

@@ -3,15 +3,16 @@
 import {
   UserCredential,
   createUserWithEmailAndPassword,
-//   signInWithEmailAndPassword,
-//   sendPasswordResetEmail,
-//   signOut,
-//   onAuthStateChanged,
+  signInWithEmailAndPassword,
+  //   sendPasswordResetEmail,
+  //   signOut,
+  onAuthStateChanged,
+  User,
 //   updateEmail,
 //   updatePassword,
 } from 'firebase/auth';
 import React, {
-  ReactNode, useContext,
+  ReactNode, useContext, useEffect, useState,
 } from 'react';
 
 import { auth } from '../firebase';
@@ -19,13 +20,15 @@ import { auth } from '../firebase';
 export interface UserContextState {
   // isAuthenticated: boolean
   // isLoading: boolean
+  currentUser: User | null
+  login: (email: string, password: string) => Promise<UserCredential>
   signUp: (email: string, password: string) => Promise<UserCredential>
   id?: string
 }
 export interface AuthContextModel {
   // auth: Auth
-  // user: User | null
-  // signIn: (email: string, password: string) => Promise<UserCredential>
+  currentUser: User | null
+  login: (email: string, password: string) => Promise<UserCredential>
   signUp: (email: string, password: string) => Promise<UserCredential>
   // sendPasswordResetEmail?: (email: string) => Promise<void>
 }
@@ -36,48 +39,47 @@ export function useAuth(): AuthContextModel {
   return useContext(AuthContext);
 }
 
-// interface AuthContextProps {
-//   // currentUser,
-//   signup: (email: string, password: string) => firebase.Thenable<unknown>,
-//   login,
-//   logout,
-//   resetPassword,
-//   updateUserEmail,
-//   updateUserPassword,
-// }
-
 interface AuthProviderProps {
   children?: ReactNode
 }
 
 export function AuthProvider({ children }: AuthProviderProps): JSX.Element {
+  const [currentUser, setCurrentUser] = useState<User | null>(null);
+  const [loading, setLoading] = useState(true);
+
   function signUp(email: string, password: string): Promise<UserCredential> {
     return createUserWithEmailAndPassword(auth, email, password);
   }
 
-  // const value = {
-  //   currentUser,
-  // signup,
-  //   login,
+  function login(email: string, password: string): Promise<UserCredential> {
+    return signInWithEmailAndPassword(auth, email, password);
+  }
+
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (curUser) => {
+      setCurrentUser(curUser);
+      setLoading(false);
+    });
+    return () => unsubscribe();
+  }, []);
+
+  const value = {
+    currentUser,
+    signUp,
+    login,
   //   logout,
   //   resetPassword,
   //   updateUserEmail,
   //   updateUserPassword,
-  // };
+  };
 
   return (
-    <AuthContext.Provider value={{ signUp }}>
-      {children}
+    <AuthContext.Provider value={value}>
+      {!loading && children}
     </AuthContext.Provider>
   );
 }
 
-// const [currentUser, setCurrentUser] = useState();
-// const [loading, setLoading] = useState(true);
-
-// function login(email: string, password: string) {
-//   return signInWithEmailAndPassword(auth, email, password);
-// }
 // function logout() {
 //   return signOut(auth);
 // }
@@ -91,13 +93,4 @@ export function AuthProvider({ children }: AuthProviderProps): JSX.Element {
 //   return updatePassword(auth.currentUser, password);
 // }
 
-// useEffect(() => {
-//   const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
-//     setCurrentUser(currentUser);
-//     setLoading(false);
-//   });
-//   return () => {
-//     return unsubscribe();
-//   };
-// }, []);
 //

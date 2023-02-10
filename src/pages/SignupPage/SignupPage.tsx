@@ -52,6 +52,9 @@ export default function SignUpPage() {
                 <Form.Group id="email">
                   <Form.Label>Email</Form.Label>
                   <Form.Control type="email" ref={emailRef} required />
+                  <Form.Text className="text-muted">
+                    We will never share your email with anyone else.
+                  </Form.Text>
                 </Form.Group>
                 <Form.Group id="password">
                   <Form.Label>Password</Form.Label>
@@ -60,6 +63,7 @@ export default function SignUpPage() {
                     ref={passwordRef}
                     required
                   />
+
                 </Form.Group>
                 <Form.Group id="password-confirm">
                   <Form.Label>Password Confirmation</Form.Label>
