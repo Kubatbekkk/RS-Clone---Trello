@@ -1,11 +1,13 @@
 /* eslint-disable import/no-extraneous-dependencies */
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Container, Nav, Navbar } from 'react-bootstrap';
 import { useAuth } from 'src/contexts/AuthContext';
 
 function NavbarComponent() {
   const { currentUser } = useAuth();
+  const [userEmail, setUserEmail] = useState<string | null>(null);
+  useEffect(() => setUserEmail(currentUser?.email || null), [currentUser?.email, userEmail]);
   return (
     <Navbar bg="primary" variant="dark">
       <Container>
@@ -20,7 +22,9 @@ function NavbarComponent() {
           <Navbar.Text className='text-info'>
             Signed in as:
             {' '}
-            <Link to="/">{currentUser?.email?.substring(0, currentUser.email.indexOf('@'))}</Link>
+            <Link to="/profile">
+              {userEmail}
+            </Link>
           </Navbar.Text>
         </Navbar.Collapse>
       </Container>

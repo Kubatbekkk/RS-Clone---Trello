@@ -5,11 +5,11 @@ import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   //   sendPasswordResetEmail,
-  //   signOut,
+  signOut,
   onAuthStateChanged,
   User,
-//   updateEmail,
-//   updatePassword,
+  updateEmail,
+  updatePassword,
 } from 'firebase/auth';
 import React, {
   ReactNode, useContext, useEffect, useState,
@@ -17,12 +17,15 @@ import React, {
 
 import { auth } from '../firebase';
 
+console.log(auth);
 export interface UserContextState {
   // isAuthenticated: boolean
   // isLoading: boolean
   currentUser: User | null
   login: (email: string, password: string) => Promise<UserCredential>
   signUp: (email: string, password: string) => Promise<UserCredential>
+  updateUserEmail: (email: string) => Promise<void>
+  updateUserPassword: (password: string) => Promise<void>
   id?: string
 }
 export interface AuthContextModel {
@@ -30,6 +33,8 @@ export interface AuthContextModel {
   currentUser: User | null
   login: (email: string, password: string) => Promise<UserCredential>
   signUp: (email: string, password: string) => Promise<UserCredential>
+  updateUserEmail: (email: string) => Promise<void>
+  updateUserPassword: (password: string) => Promise<void>
   // sendPasswordResetEmail?: (email: string) => Promise<void>
 }
 
@@ -55,22 +60,33 @@ export function AuthProvider({ children }: AuthProviderProps): JSX.Element {
     return signInWithEmailAndPassword(auth, email, password);
   }
 
+  function logout() {
+    return signOut(auth);
+  }
+
+  function updateUserEmail(email: string): Promise<void> {
+    return updateEmail(auth.currentUser as User, email);
+  }
+  function updateUserPassword(password: string): Promise<void> {
+    return updatePassword(auth.currentUser as User, password);
+  }
+
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (curUser) => {
       setCurrentUser(curUser);
       setLoading(false);
     });
-    return () => unsubscribe();
-  }, []);
+    return unsubscribe;
+  }, [currentUser?.email]);
 
   const value = {
     currentUser,
     signUp,
     login,
-  //   logout,
-  //   resetPassword,
-  //   updateUserEmail,
-  //   updateUserPassword,
+    logout,
+    //   resetPassword,
+    updateUserEmail,
+    updateUserPassword,
   };
 
   return (
@@ -80,17 +96,8 @@ export function AuthProvider({ children }: AuthProviderProps): JSX.Element {
   );
 }
 
-// function logout() {
-//   return signOut(auth);
-// }
 // function resetPassword(email: string) {
 //   return sendPasswordResetEmail(auth, email);
-// }
-// function updateUserEmail(email: string) {
-//   return updateEmail(auth.currentUser, email);
-// }
-// function updateUserPassword(password: string) {
-//   return updatePassword(auth.currentUser, password);
 // }
 
 //
