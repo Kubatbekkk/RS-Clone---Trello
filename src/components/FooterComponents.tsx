@@ -17,7 +17,7 @@ function Footer() {
             <ul className="list-unstyled">
               <li><a href="https://github.com/elMP" className='link-light' target='_blank' rel="noreferrer">Elena</a></li>
               <li><a href="https://github.com/Kubatbekkk" className='link-light' target='_blank' rel="noreferrer">Kubat</a></li>
-              <li><a href="https://github.com/meloknaasfalte" className='link-light' target='_blank' rel="noreferrer">Nurlan</a></li>
+              <li><a href="https://github.com/meloknaasfalte" className='link-light' target='_blank' rel="noreferrer">Vlad</a></li>
             </ul>
           </div>
 
