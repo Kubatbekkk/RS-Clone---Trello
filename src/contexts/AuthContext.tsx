@@ -14,7 +14,7 @@ import {
 import React, {
   useContext, useEffect, useState,
 } from 'react';
-import { AuthContextModel, AuthProviderProps, UserContextState } from 'src/pages/types/types';
+import type { AuthContextModel, AuthProviderProps, UserContextState } from 'src/pages/types/types';
 import { auth } from '../firebase';
 
 const AuthContext = React.createContext<UserContextState>({} as UserContextState);
