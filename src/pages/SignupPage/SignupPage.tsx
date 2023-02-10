@@ -77,14 +77,15 @@ export default function SignUpPage() {
                   Sign Up
                 </Button>
               </Form>
+              <div className="w-100 text-center mt-2">
+                Already have an account?
+                {' '}
+                <Link to="/login"> Log In</Link>
+              </div>
             </div>
           </Card.Body>
         </Card>
-        <div className="w-100 text-center mt-2">
-          Already have an account?
-          {' '}
-          <Link to="/login"> Log In</Link>
-        </div>
+
       </div>
     </Container>
   );

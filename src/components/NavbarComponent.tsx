@@ -1,12 +1,24 @@
 /* eslint-disable import/no-extraneous-dependencies */
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
-import { Container, Nav, Navbar } from 'react-bootstrap';
+import { Link, useNavigate } from 'react-router-dom';
+import {
+  Button, Container, Nav, Navbar,
+} from 'react-bootstrap';
 import { useAuth } from 'src/contexts/AuthContext';
 
 function NavbarComponent() {
-  const { currentUser } = useAuth();
   const [userEmail, setUserEmail] = useState<string | null>(null);
+  const { currentUser, logout } = useAuth();
+  const navigate = useNavigate();
+
+  const handleLogout = async () => {
+    try {
+      await logout();
+      navigate('/login');
+    } catch (e) {
+      if (e instanceof Error) console.error(e.message);
+    }
+  };
   useEffect(() => setUserEmail(currentUser?.email || null), [currentUser?.email, userEmail]);
   return (
     <Navbar bg="primary" variant="dark">
@@ -14,18 +26,27 @@ function NavbarComponent() {
         <Navbar.Brand><Link to="/" className='text-warning text-decoration-none'>Trello</Link></Navbar.Brand>
         <Nav className="me-auto align-items-center gap-4">
           <Link to="/" className='text-light text-decoration-none'>Home</Link>
-          <Link to="/signup" className='text-light text-decoration-none'>Sign Up</Link>
-          <Link to="/login" className='text-light text-decoration-none'>Log In</Link>
-          <Link to="/boards" className='text-light text-decoration-none'>Boards</Link>
+          {/* <Link to="/login" className='text-light text-decoration-none'>Log In</Link> */}
+          {currentUser
+          && (<Link to="/boards" className='text-light text-decoration-none'>Boards</Link>)}
         </Nav>
         <Navbar.Collapse className="justify-content-end">
-          <Navbar.Text className='text-info'>
-            Signed in as:
-            {' '}
-            <Link to="/profile">
-              {userEmail}
-            </Link>
-          </Navbar.Text>
+          {currentUser ? (
+            <Navbar.Text className='text-info d-flex align-items-center gap-2'>
+              Signed in as:
+              {' '}
+              <Link to="/profile" className='mx-auto'>
+                {userEmail}
+              </Link>
+              <Button type="button" onClick={handleLogout} className="btn btn-secondary btn-sm">Log Out</Button>
+            </Navbar.Text>
+          ) : (
+            <div className='d-flex align-items-center gap-4'>
+              <Link to='/login' className='text-light text-decoration-none'>Log In</Link>
+              <Link to="/signup" className='text-warning text-decoration-none'>Sign Up</Link>
+            </div>
+          )}
+
         </Navbar.Collapse>
       </Container>
     </Navbar>

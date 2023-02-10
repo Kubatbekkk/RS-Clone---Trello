@@ -4,48 +4,23 @@ import {
   UserCredential,
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
-  //   sendPasswordResetEmail,
   signOut,
   onAuthStateChanged,
   User,
   updateEmail,
   updatePassword,
+  sendPasswordResetEmail,
 } from 'firebase/auth';
 import React, {
-  ReactNode, useContext, useEffect, useState,
+  useContext, useEffect, useState,
 } from 'react';
-
+import { AuthContextModel, AuthProviderProps, UserContextState } from 'src/pages/types/types';
 import { auth } from '../firebase';
-
-console.log(auth);
-export interface UserContextState {
-  // isAuthenticated: boolean
-  // isLoading: boolean
-  currentUser: User | null
-  login: (email: string, password: string) => Promise<UserCredential>
-  signUp: (email: string, password: string) => Promise<UserCredential>
-  updateUserEmail: (email: string) => Promise<void>
-  updateUserPassword: (password: string) => Promise<void>
-  id?: string
-}
-export interface AuthContextModel {
-  // auth: Auth
-  currentUser: User | null
-  login: (email: string, password: string) => Promise<UserCredential>
-  signUp: (email: string, password: string) => Promise<UserCredential>
-  updateUserEmail: (email: string) => Promise<void>
-  updateUserPassword: (password: string) => Promise<void>
-  // sendPasswordResetEmail?: (email: string) => Promise<void>
-}
 
 const AuthContext = React.createContext<UserContextState>({} as UserContextState);
 
 export function useAuth(): AuthContextModel {
   return useContext(AuthContext);
-}
-
-interface AuthProviderProps {
-  children?: ReactNode
 }
 
 export function AuthProvider({ children }: AuthProviderProps): JSX.Element {
@@ -60,15 +35,20 @@ export function AuthProvider({ children }: AuthProviderProps): JSX.Element {
     return signInWithEmailAndPassword(auth, email, password);
   }
 
-  function logout() {
+  function logout(): Promise<void> {
     return signOut(auth);
   }
 
   function updateUserEmail(email: string): Promise<void> {
     return updateEmail(auth.currentUser as User, email);
   }
+
   function updateUserPassword(password: string): Promise<void> {
     return updatePassword(auth.currentUser as User, password);
+  }
+
+  function resetPassword(email: string) {
+    return sendPasswordResetEmail(auth, email);
   }
 
   useEffect(() => {
@@ -84,7 +64,7 @@ export function AuthProvider({ children }: AuthProviderProps): JSX.Element {
     signUp,
     login,
     logout,
-    //   resetPassword,
+    resetPassword,
     updateUserEmail,
     updateUserPassword,
   };
@@ -95,9 +75,3 @@ export function AuthProvider({ children }: AuthProviderProps): JSX.Element {
     </AuthContext.Provider>
   );
 }
-
-// function resetPassword(email: string) {
-//   return sendPasswordResetEmail(auth, email);
-// }
-
-//

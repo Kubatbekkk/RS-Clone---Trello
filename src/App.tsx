@@ -2,7 +2,8 @@
 import React from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import {
-  Home, NotFoundPage, BoardsPage, LoginPage, SignUpPage, ProfilePage,
+  Home, NotFoundPage, BoardsPage, LoginPage,
+  SignUpPage, ProfilePage, PrivateRoute, ForgotPasswordPage,
 } from './pages';
 import { NavbarComponent } from './components';
 import { AuthProvider } from './contexts/AuthContext';
@@ -20,11 +21,28 @@ function App() {
               element={<Home />}
             />
           ))}
-          <Route path='*' element={<NotFoundPage />} />
-          <Route path='/boards' element={<BoardsPage />} />
           <Route path='/signup' element={<SignUpPage />} />
           <Route path='/login' element={<LoginPage />} />
-          <Route path='/profile' element={<ProfilePage />} />
+          <Route path='/forgot-password' element={<ForgotPasswordPage />} />
+          {/* Private Routes */}
+          <Route
+            path='/boards'
+            element={(
+              <PrivateRoute>
+                <BoardsPage />
+              </PrivateRoute>
+          )}
+          />
+
+          <Route
+            path='/profile'
+            element={(
+              <PrivateRoute>
+                <ProfilePage />
+              </PrivateRoute>
+)}
+          />
+          <Route path='*' element={<NotFoundPage />} />
         </Routes>
       </AuthProvider>
     </BrowserRouter>

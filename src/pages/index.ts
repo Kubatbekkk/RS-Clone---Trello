@@ -4,6 +4,8 @@ import BoardsPage from './BoardsPage/BoardsPage';
 import LoginPage from './LoginPage/LoginPage';
 import SignUpPage from './SignupPage/SignupPage';
 import ProfilePage from './ProfilePage/ProfilePage';
+import PrivateRoute from './PrivateRoute/PrivateRoute';
+import ForgotPasswordPage from './ForgotPasswordPage/ForgotPasswordPage';
 
 export {
   Home,
@@ -12,4 +14,6 @@ export {
   LoginPage,
   SignUpPage,
   ProfilePage,
+  PrivateRoute,
+  ForgotPasswordPage,
 };

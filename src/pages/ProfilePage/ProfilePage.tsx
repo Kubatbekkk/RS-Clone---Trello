@@ -4,7 +4,7 @@ import React, { useRef, useState } from 'react';
 import {
   Card, Form, Button, Alert, Container,
 } from 'react-bootstrap';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { useAuth } from 'src/contexts/AuthContext';
 
 export default function ProfilePage() {
@@ -14,7 +14,7 @@ export default function ProfilePage() {
   const passwordRef = useRef<HTMLInputElement>(null);
   const passwordConfirmRef = useRef<HTMLInputElement>(null);
   const { currentUser, updateUserEmail, updateUserPassword } = useAuth();
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
   function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -39,7 +39,7 @@ export default function ProfilePage() {
 
     Promise.all(promises)
       .then(() => {
-        navigate('/');
+        // navigate('/');
       })
       .catch(() => {
         setError('Failed to update account.');
@@ -62,7 +62,13 @@ export default function ProfilePage() {
               {error && <Alert variant="danger">{error}</Alert>}
               <Form onSubmit={handleSubmit}>
                 <Form.Group id="email">
-                  <Form.Label>Email</Form.Label>
+                  <Form.Label>
+                    Email:
+                    {' '}
+                    <Form.Text className='text-primary'>
+                      {currentUser?.email || ''}
+                    </Form.Text>
+                  </Form.Label>
                   <Form.Control
                     type="email"
                     ref={emailRef}
