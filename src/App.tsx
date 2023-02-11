@@ -35,7 +35,7 @@ function App() {
           />
 
           <Route
-            path='/profile'
+            path='/:uid'
             element={(
               <PrivateRoute>
                 <ProfilePage />

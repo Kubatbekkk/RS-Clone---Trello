@@ -35,7 +35,7 @@ function NavbarComponent() {
             <Navbar.Text className='text-info d-flex align-items-center gap-2'>
               Signed in as:
               {' '}
-              <Link to="/profile" className='mx-auto'>
+              <Link to={`/${currentUser.uid}`} className='mx-auto'>
                 {userEmail}
               </Link>
               <Button type="button" onClick={handleLogout} className="btn btn-secondary btn-sm">Log Out</Button>
