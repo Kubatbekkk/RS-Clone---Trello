@@ -38,14 +38,11 @@ export default function SignUpPage() {
     setLoading(false);
   }
   return (
-    <Container
-      className='mt-5 d-flex justify-content-center align-items-center'
-
-    >
-      <div className='w-50'>
-        <Card className='mt-4 pb-5' style={{ maxWidth: '33rem' }}>
-          <Card.Body className='d-flex justify-content-center align-items-center'>
-            <div className='w-75'>
+    <Container className="mt-5 d-flex justify-content-center align-items-center">
+      <div className="w-50">
+        <Card className="mt-4 pb-5" style={{ maxWidth: '33rem' }}>
+          <Card.Body className="d-flex justify-content-center align-items-center">
+            <div className="w-75">
               <h2 className="text-center mb-4">Sign Up</h2>
               {error && <Alert variant="danger">{error}</Alert>}
               <Form onSubmit={handleSubmit}>
@@ -58,20 +55,11 @@ export default function SignUpPage() {
                 </Form.Group>
                 <Form.Group id="password">
                   <Form.Label>Password</Form.Label>
-                  <Form.Control
-                    type="password"
-                    ref={passwordRef}
-                    required
-                  />
-
+                  <Form.Control type="password" ref={passwordRef} required />
                 </Form.Group>
                 <Form.Group id="password-confirm">
                   <Form.Label>Password Confirmation</Form.Label>
-                  <Form.Control
-                    type="password"
-                    ref={passwordConfirmRef}
-                    required
-                  />
+                  <Form.Control type="password" ref={passwordConfirmRef} required />
                 </Form.Group>
                 <Button disabled={loading} className="w-100 mt-4" type="submit">
                   Sign Up
@@ -85,7 +73,6 @@ export default function SignUpPage() {
             </div>
           </Card.Body>
         </Card>
-
       </div>
     </Container>
   );
