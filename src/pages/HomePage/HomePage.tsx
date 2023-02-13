@@ -2,9 +2,11 @@ import React from 'react';
 import useTitle from 'src/hooks/useTitle';
 import { Container } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
+import { useAuth } from 'src/contexts/AuthContext';
 
 export default function HomePage() {
   useTitle('HomePage');
+  const { currentUser } = useAuth();
   return (
     <Container className='mt-4 '>
       <header style={{ paddingLeft: 0, minHeight: '65vh' }}>
@@ -17,6 +19,7 @@ export default function HomePage() {
               <div className='text-white'>
                 <h1 className='mb-3'>RS Trello</h1>
                 <h4 className='mb-3'>A simple clone of Trello for RSClone Task.</h4>
+                {!currentUser && (
                 <div className='d-flex justify-content-center gap-5 mt-5'>
                   <Link className='btn btn-outline-success btn-lg' to='/signup' role='button'>
                     Sign Up
@@ -25,6 +28,8 @@ export default function HomePage() {
                     Log In
                   </Link>
                 </div>
+                )}
+
               </div>
             </div>
           </div>

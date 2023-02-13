@@ -11,9 +11,8 @@ import {
   updatePassword,
   sendPasswordResetEmail,
 } from 'firebase/auth';
-import React, {
-  useContext, useEffect, useState,
-} from 'react';
+import React, { useContext, useEffect, useState } from 'react';
+// import { useNavigate } from 'react-router-dom';
 import type { AuthContextModel, AuthProviderProps, UserContextState } from 'src/pages/types/types';
 import { auth } from '../firebase';
 
@@ -40,7 +39,9 @@ export function AuthProvider({ children }: AuthProviderProps): JSX.Element {
   }
 
   function updateUserEmail(email: string): Promise<void> {
-    return updateEmail(auth.currentUser as User, email);
+    return updateEmail(auth.currentUser as User, email).then(() => {
+      setCurrentUser((user) => user && { ...user, email });
+    });
   }
 
   function updateUserPassword(password: string): Promise<void> {
@@ -50,14 +51,17 @@ export function AuthProvider({ children }: AuthProviderProps): JSX.Element {
   function resetPassword(email: string) {
     return sendPasswordResetEmail(auth, email);
   }
-
+  // const navigate = useNavigate();
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (curUser) => {
       setCurrentUser(curUser);
       setLoading(false);
     });
+    // if (currentUser) {
+    //   navigate('/home');
+    // }
     return unsubscribe;
-  }, [currentUser?.email]);
+  }, [currentUser?.email, currentUser]);
 
   const value = {
     currentUser,
@@ -69,9 +73,5 @@ export function AuthProvider({ children }: AuthProviderProps): JSX.Element {
     updateUserPassword,
   };
 
-  return (
-    <AuthContext.Provider value={value}>
-      {!loading && children}
-    </AuthContext.Provider>
-  );
+  return <AuthContext.Provider value={value}>{!loading && children}</AuthContext.Provider>;
 }

@@ -1,5 +1,5 @@
 /* eslint-disable import/no-extraneous-dependencies */
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import {
   Button, Container, Nav, Navbar,
@@ -7,7 +7,6 @@ import {
 import { useAuth } from 'src/contexts/AuthContext';
 
 function NavbarComponent() {
-  const [userEmail, setUserEmail] = useState<string | null>(null);
   const { currentUser, logout } = useAuth();
   const navigate = useNavigate();
 
@@ -19,34 +18,48 @@ function NavbarComponent() {
       if (e instanceof Error) console.error(e.message);
     }
   };
-  useEffect(() => setUserEmail(currentUser?.email || null), [currentUser?.email, userEmail]);
+  // useEffect(() => setUserEmail(currentUser?.email || null), [currentUser?.email, userEmail]);
   return (
     <Navbar bg="primary" variant="dark">
       <Container>
-        <Navbar.Brand><Link to="/" className='text-warning text-decoration-none'>Trello</Link></Navbar.Brand>
+        <Navbar.Brand>
+          <Link to="/" className="text-warning text-decoration-none">
+            Trello
+          </Link>
+        </Navbar.Brand>
         <Nav className="me-auto align-items-center gap-4">
-          <Link to="/" className='text-light text-decoration-none'>Home</Link>
+          <Link to="/" className="text-light text-decoration-none">
+            Home
+          </Link>
           {/* <Link to="/login" className='text-light text-decoration-none'>Log In</Link> */}
-          {currentUser
-          && (<Link to="/boards" className='text-light text-decoration-none'>Boards</Link>)}
+          {currentUser && (
+            <Link to="/boards" className="text-light text-decoration-none">
+              Boards
+            </Link>
+          )}
         </Nav>
         <Navbar.Collapse className="justify-content-end">
           {currentUser ? (
-            <Navbar.Text className='text-info d-flex align-items-center gap-2'>
+            <Navbar.Text className="text-info d-flex align-items-center gap-2">
               Signed in as:
               {' '}
-              <Link to={`/${currentUser.uid}`} className='mx-auto'>
-                {userEmail}
+              <Link to={`/${currentUser.uid}`} className="mx-auto">
+                {currentUser.email}
               </Link>
-              <Button type="button" onClick={handleLogout} className="btn btn-secondary btn-sm">Log Out</Button>
+              <Button type="button" onClick={handleLogout} className="btn btn-secondary btn-sm">
+                Log Out
+              </Button>
             </Navbar.Text>
           ) : (
-            <div className='d-flex align-items-center gap-4'>
-              <Link to='/login' className='text-light text-decoration-none'>Log In</Link>
-              <Link to="/signup" className='text-warning text-decoration-none'>Sign Up</Link>
+            <div className="d-flex align-items-center gap-4">
+              <Link to="/login" className="text-light text-decoration-none">
+                Log In
+              </Link>
+              <Link to="/signup" className="text-warning text-decoration-none">
+                Sign Up
+              </Link>
             </div>
           )}
-
         </Navbar.Collapse>
       </Container>
     </Navbar>
