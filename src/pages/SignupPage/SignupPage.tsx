@@ -5,6 +5,7 @@ import {
   Card, Form, Button, Alert, Container,
 } from 'react-bootstrap';
 import { Link, useNavigate } from 'react-router-dom';
+import { authService } from 'src/services/auth';
 import { useAuth } from '../../contexts/AuthContext';
 
 export default function SignUpPage() {
@@ -27,7 +28,8 @@ export default function SignUpPage() {
     try {
       setError('');
       setLoading(true);
-      await signUp(emailRef.current!.value, passwordRef.current!.value);
+      const authUser = await signUp(emailRef.current!.value, passwordRef.current!.value);
+      await authService.createUser(authUser.user.uid, authUser.user.email);
       navigate('/');
     } catch (err: unknown) {
       if (err instanceof Error) {

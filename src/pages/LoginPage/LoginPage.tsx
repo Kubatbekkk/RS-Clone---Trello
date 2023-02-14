@@ -37,7 +37,6 @@ function LoginPage() {
   return (
     <Container
       className='mt-5 d-flex justify-content-center align-items-center'
-
     >
       <div className='w-50'>
         <Card className='mt-4 pb-3' style={{ maxWidth: '33rem' }}>

@@ -10,6 +10,7 @@ import {
   ProfilePage,
   PrivateRoute,
   ForgotPasswordPage,
+  SingleBoardPage,
 } from './pages';
 import { Footer, NavbarComponent } from './components';
 import { AuthProvider } from './contexts/AuthContext';
@@ -32,6 +33,14 @@ function App() {
             element={(
               <PrivateRoute>
                 <BoardsPage />
+              </PrivateRoute>
+              )}
+          />
+          <Route
+            path="/boards/:itemKey"
+            element={(
+              <PrivateRoute>
+                <SingleBoardPage />
               </PrivateRoute>
               )}
           />

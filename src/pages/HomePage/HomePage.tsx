@@ -8,7 +8,7 @@ export default function HomePage() {
   useTitle('HomePage');
   const { currentUser } = useAuth();
   return (
-    <Container className="mt-4 ">
+    <Container className="mt-4">
       <header style={{ paddingLeft: 0, minHeight: '65vh' }}>
         <div
           className="p-5 text-center bg-image"

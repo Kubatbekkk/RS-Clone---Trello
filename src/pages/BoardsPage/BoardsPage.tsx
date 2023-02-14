@@ -6,33 +6,41 @@ import {
 } from 'firebase/database';
 import React, { useEffect, useState } from 'react';
 import { Container } from 'react-bootstrap';
-import { useAuth } from 'src/contexts/AuthContext';
-import userBoards from 'src/helpers/userBoards';
+import { boardService } from 'src/services/board';
 import useTitle from 'src/hooks/useTitle';
+import BoardTitle from 'src/components/BoardTitle';
+import { useNavigate } from 'react-router-dom';
+import BoardModal from 'src/components/BoardModal';
 
 export default function BoardsPage() {
   useTitle('BoardsPage');
-  const { currentUser } = useAuth();
-  const [loading, setLoading] = useState(false);
-  const [boards, setBoards] = useState({});
+  const [loading, setLoading] = useState<boolean>(false);
+  const [boards, setBoards] = useState<Array<{ title: string; key: string }>>([]);
+  const [, setBoard] = useState<string>('');
+  const [modalVisible, setModalVisible] = useState<boolean>(false);
+  const navigate = useNavigate();
 
-  console.log(loading, Array.isArray(boards));
-
-  const objectToArray = (data: { [s: string]: unknown; } | ArrayLike<unknown>) => (!data
+  const objectToArray = (data: { title: string; key: string }) => (!data
     ? []
-    : Object.values(data).map((value, index) => ({
-      ...value,
+    : Object.values(data).map((_, index) => ({
+      title: Object.values(data)[index],
       key: Object.keys(data)[index],
     })));
 
   const fetchBoards = async () => {
-    onValue(userBoards(currentUser), (snapshot) => {
+    onValue(boardService.userBoards(), (snapshot) => {
       if (!snapshot) {
         return;
       }
-      setBoards(objectToArray(snapshot.val() || {}));
+      setBoards(objectToArray(snapshot.val()));
       setLoading(false);
     });
+  };
+
+  const addBoardd = async (_board: string) => {
+    await boardService.addBoard(_board);
+    setModalVisible(false);
+    setBoard('');
   };
 
   useEffect(() => {
@@ -42,13 +50,45 @@ export default function BoardsPage() {
     })();
   }, []);
 
+  if (loading) {
+    return (
+      <Container
+        className='d-flex
+                   justify-center
+                   align-items-center'
+        style={{ minHeight: '65vh' }}
+      >
+        <h1>Loading...</h1>
+      </Container>
+    );
+  }
   return (
-    <Container>
+    <Container style={{ minHeight: '65vh' }}>
       <h1>BoardsPage</h1>
       <div>
-        <input type="text" />
-        <button type='button'>Add</button>
-
+        <div className="d-flex mb-3 align-items-center">
+          🧑 Personal Boards
+        </div>
+        <div className='d-flex gap-4 mt-2'>
+          {!boards.length
+            ? <p>No boards</p>
+            : boards.map((item) => (
+              <BoardTitle
+                key={item?.key}
+                title={item?.title}
+                handleBoardClick={() => navigate(`/boards/${item?.key}`)}
+              />
+            ))}
+          <BoardTitle
+            title="Add new board"
+            handleBoardClick={() => setModalVisible(true)}
+          />
+        </div>
+        <BoardModal
+          addBoard={addBoardd}
+          closeModal={() => setModalVisible(false)}
+          visible={modalVisible}
+        />
       </div>
     </Container>
   );
