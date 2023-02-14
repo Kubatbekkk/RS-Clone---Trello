@@ -12,10 +12,19 @@ interface ModalProps {
 function BoardModal(props: ModalProps) {
   const { addBoard, closeModal, visible } = props;
   const [titleBoard, setTitleBoard] = useState<string>('');
+  const [, setLoading] = useState<boolean>(true);
+
+  const isEmptyText = (text: string) => !text || !text.trim();
 
   const handleCreateBoard = async (event: React.FormEvent<HTMLFormElement>) => {
+    setLoading(true);
     event.preventDefault();
-    addBoard(titleBoard);
+    if (isEmptyText(titleBoard)) {
+      return;
+    }
+    await addBoard(titleBoard);
+    setTitleBoard('');
+    setLoading(false);
   };
 
   return (
@@ -25,30 +34,35 @@ function BoardModal(props: ModalProps) {
       </Modal.Header>
       <>
         <Modal.Body>
-          <Form onSubmit={(ev) => handleCreateBoard(ev)}>
-            <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+          <Form onSubmit={handleCreateBoard}>
+            <Form.Group className="mb-3">
               <Form.Label>Board Title</Form.Label>
               <Form.Control
                 type="text"
-                placeholder="title"
+                placeholder="Board Title"
                 autoFocus
                 onChange={(ev) => setTitleBoard(ev.target.value)}
               />
             </Form.Group>
-            <Form.Group
+            {/* <Form.Group
               className="mb-3"
               controlId="exampleForm.ControlTextarea1"
             >
               <Form.Label>Example textarea</Form.Label>
               <Form.Control as="textarea" rows={3} />
-            </Form.Group>
+            </Form.Group> */}
           </Form>
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={closeModal}>
             Close
           </Button>
-          <Button variant="primary" onClick={closeModal}>
+          <Button
+            variant="primary"
+            type='submit'
+            onClick={closeModal}
+            disabled={isEmptyText(titleBoard)}
+          >
             Save Changes
           </Button>
         </Modal.Footer>

@@ -16,7 +16,6 @@ export default function BoardsPage() {
   useTitle('BoardsPage');
   const [loading, setLoading] = useState<boolean>(false);
   const [boards, setBoards] = useState<Array<{ title: string; key: string }>>([]);
-  const [, setBoard] = useState<string>('');
   const [modalVisible, setModalVisible] = useState<boolean>(false);
   const navigate = useNavigate();
 
@@ -40,7 +39,6 @@ export default function BoardsPage() {
   const addBoardd = async (_board: string) => {
     await boardService.addBoard(_board);
     setModalVisible(false);
-    setBoard('');
   };
 
   useEffect(() => {
@@ -64,7 +62,7 @@ export default function BoardsPage() {
   }
   return (
     <Container style={{ minHeight: '65vh' }}>
-      <h1>BoardsPage</h1>
+      <h5 className='my-4'>BoardsPage</h5>
       <div>
         <div className="d-flex mb-3 align-items-center">
           🧑 Personal Boards
