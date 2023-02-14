@@ -45,6 +45,6 @@
         "esModuleInterop": true,
         "isolatedModules": true,
     },
-    "include": ["src/**/**/*", "webpack.config.js"],
+    "include": ["src/**/**/*", "webpack.config.js", "node_modules/trello.d.ts"],
     "exclude": ["node_modules"]
 }

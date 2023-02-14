@@ -51,21 +51,22 @@ function BoardModal(props: ModalProps) {
               <Form.Label>Example textarea</Form.Label>
               <Form.Control as="textarea" rows={3} />
             </Form.Group> */}
+            <div className='d-flex gap-4'>
+              <Button variant="secondary" onClick={closeModal}>
+                Close
+              </Button>
+              <Button
+                variant="primary"
+                type='submit'
+                onClick={closeModal}
+                disabled={isEmptyText(titleBoard)}
+              >
+                Save Changes
+              </Button>
+            </div>
           </Form>
         </Modal.Body>
-        <Modal.Footer>
-          <Button variant="secondary" onClick={closeModal}>
-            Close
-          </Button>
-          <Button
-            variant="primary"
-            type='submit'
-            onClick={closeModal}
-            disabled={isEmptyText(titleBoard)}
-          >
-            Save Changes
-          </Button>
-        </Modal.Footer>
+        <Modal.Footer />
       </>
     </Modal>
   );

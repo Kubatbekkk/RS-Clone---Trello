@@ -20,7 +20,7 @@ function NavbarComponent() {
   };
   // useEffect(() => setUserEmail(currentUser?.email || null), [currentUser?.email, userEmail]);
   return (
-    <Navbar bg="primary" variant="dark">
+    <Navbar bg="primary" variant="dark" className='shadow'>
       <Container>
         <Navbar.Brand>
           <Link to="/" className="text-warning text-decoration-none">

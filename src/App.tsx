@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-wrap-multilines */
 /* eslint-disable react/no-array-index-key */
 import React from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
@@ -30,28 +31,28 @@ function App() {
           {/* Private Routes */}
           <Route
             path="/boards"
-            element={(
+            element={
               <PrivateRoute>
                 <BoardsPage />
               </PrivateRoute>
-              )}
+            }
           />
           <Route
             path="/boards/:itemKey"
-            element={(
+            element={
               <PrivateRoute>
                 <SingleBoardPage />
               </PrivateRoute>
-              )}
+            }
           />
 
           <Route
             path="/:uid"
-            element={(
+            element={
               <PrivateRoute>
                 <ProfilePage />
               </PrivateRoute>
-              )}
+            }
           />
           <Route path="*" element={<NotFoundPage />} />
         </Routes>

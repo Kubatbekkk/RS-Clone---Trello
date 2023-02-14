@@ -9,8 +9,9 @@ module.exports = {
   output: {
     filename: 'bundle.[fullhash].js',
     path: path.resolve(__dirname, 'dist'),
+    publicPath: '/',
   },
-  devtool: 'source-map',
+  devtool: 'eval-source-map',
   devServer: {
     historyApiFallback: true,
   },
