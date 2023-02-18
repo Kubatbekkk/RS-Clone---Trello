@@ -63,6 +63,7 @@ export default function BoardsPage() {
       </Container>
     );
   }
+  console.log('lanes: ', boards);
   return (
     <Container style={{ minHeight: '65vh' }}>
       <h5 className="my-4">BoardsPage</h5>

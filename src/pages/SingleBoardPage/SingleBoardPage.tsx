@@ -11,20 +11,6 @@ function SingleBoardPage() {
   });
   const [loading, setLoading] = useState<boolean>(false);
 
-  useEffect(() => {
-    (async () => {
-      setLoading(true);
-      await fetchBoard();
-      setLoading(false);
-    })();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
-  const fetchBoard = async () => {
-    const data = (await boardService.getBoard(boardId() || '')).val();
-    setBoard(prepareBoard(data));
-  };
-
   const prepareBoard = (_board: { lanes: unknown }) => ({
     ..._board,
     lanes: (_board?.lanes || []).map((lane: { cards: unknown; }) => ({
@@ -33,9 +19,24 @@ function SingleBoardPage() {
     })),
   });
   const boardId = (): string => itemKey || '';
-  // const { updateBoard } = boardService;
-  // const handleDataChange = async (data: { lanes: typeof Lane[] }) => updateBoard(boardId(), data);
-  console.log(Array.isArray(board.lanes));
+
+  const fetchBoard = async () => {
+    const data = (await boardService.getBoard(boardId() || '')).val();
+    setBoard(prepareBoard(data));
+  };
+
+  const { updateBoard } = boardService;
+  const handleDataChange = async (data: { lanes: typeof Lane[] }) => updateBoard(boardId(), data);
+
+  useEffect(() => {
+    (async () => {
+      setLoading(true);
+      await fetchBoard();
+      setLoading(false);
+    })();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+  console.log('board: ', board);
   if (loading) {
     return (
       <Container
@@ -56,6 +57,7 @@ function SingleBoardPage() {
       data={{
         lanes: board.lanes || [],
       }}
+      onDataChange={handleDataChange}
     />
 
   );
