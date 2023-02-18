@@ -8,6 +8,7 @@ import {
 import { Footer, NavbarComponent } from './components';
 import { AuthProvider } from './contexts/AuthContext';
 
+
 function App() {
   return (
     <BrowserRouter>
