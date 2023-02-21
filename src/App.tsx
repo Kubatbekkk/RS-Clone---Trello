@@ -10,6 +10,7 @@ import Board from './pages/Board';
 import { dark } from './styles/theme';
 import GlobalStyle from './styles/GlobalStyles';
 import Navbar from './components/Navbar';
+import Sidebar from './components/Sidebar';
 // import AppRoutes from './routes';
 
 function App() {
@@ -17,6 +18,7 @@ function App() {
     <ThemeProvider theme={dark}>
       <Router>
         <Navbar />
+        <Sidebar />
         <Routes>
           <Route path='/' element={<Home />} />
           <Route path="/board" element={<Board />} />

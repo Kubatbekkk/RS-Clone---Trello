@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
-import Button from 'src/utils/Button';
+import { useLocation } from 'react-router-dom';
+import Button from 'src/components/Utils/Button';
 import NotesIcon from '../../assets/notes-icon.svg';
 import { StyledNavbar } from './styles';
 
@@ -8,8 +8,7 @@ const Navbar = (): JSX.Element => {
   const [actualPage, setActualPage] = useState('');
 
   const { pathname } = useLocation();
-  const navigate = useNavigate();
-  console.log(navigate);
+  // const navigate = useNavigate();
 
   useEffect(() => {
     if (pathname.slice(0, 6) === '/board') setActualPage('Your tasks');
@@ -35,7 +34,7 @@ const Navbar = (): JSX.Element => {
 
         <p>Hello, Username</p>
         <Button
-          text="Leave >"
+          text="Logout"
           width="80px"
           height="30px"
         />
