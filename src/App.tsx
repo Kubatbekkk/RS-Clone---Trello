@@ -15,8 +15,8 @@ import Navbar from './components/Navbar';
 function App() {
   return (
     <ThemeProvider theme={dark}>
-      <Navbar />
       <Router>
+        <Navbar />
         <Routes>
           <Route path='/' element={<Home />} />
           <Route path="/board" element={<Board />} />

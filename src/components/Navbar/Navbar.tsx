@@ -1,31 +1,47 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
 import Button from 'src/utils/Button';
 import NotesIcon from '../../assets/notes-icon.svg';
 import { StyledNavbar } from './styles';
 
-const Navbar = () => (
-  <StyledNavbar>
-    <div className="sectionName">
-      <img src={NotesIcon} alt='notes-icon' />
-      <h1>ActualPage</h1>
-    </div>
-    <div />
-    <div>
-      {/* <span>Your tasks</span> */}
-      <Button
-        text="+"
-        height="40px"
-        width="40px"
-      />
+const Navbar = (): JSX.Element => {
+  const [actualPage, setActualPage] = useState('');
 
-      <p>Hello, username</p>
-      <Button
-        text="Leave >"
-        width="80px"
-        height="30px"
-      />
-    </div>
-  </StyledNavbar>
-);
+  const { pathname } = useLocation();
+  const navigate = useNavigate();
+  console.log(navigate);
+
+  useEffect(() => {
+    if (pathname.slice(0, 6) === '/board') setActualPage('Your tasks');
+    // if (pathname.slice(0, 6) === "/login") setActualPage("Login");
+    // if (pathname.slice(0, 9) === "/register") setActualPage("Register");
+    if (pathname === '/') setActualPage('Boards');
+  }, [pathname]);
+  return (
+    <StyledNavbar>
+      <div className="sectionName">
+        <img src={NotesIcon} alt='notes-icon' />
+        <h1>{actualPage}</h1>
+      </div>
+      <div />
+      <div>
+        {actualPage === 'Your tasks' && (
+        <Button
+          text="+"
+          height="40px"
+          width="40px"
+        />
+        )}
+
+        <p>Hello, Username</p>
+        <Button
+          text="Leave >"
+          width="80px"
+          height="30px"
+        />
+      </div>
+    </StyledNavbar>
+  );
+};
 
 export default Navbar;
