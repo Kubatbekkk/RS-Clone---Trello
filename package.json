@@ -47,12 +47,14 @@
   },
   "dependencies": {
     "@babel/plugin-syntax-jsx": "^7.18.6",
-    "bootstrap": "^5.2.3",
+    "@types/styled-components": "^5.1.26",
     "firebase": "^9.17.1",
     "react": "18.2.0",
-    "react-bootstrap": "^2.7.0",
     "react-dom": "18.2.0",
+    "react-icons": "^4.7.1",
     "react-router-dom": "^6.8.0",
+    "styled-components": "^5.3.6",
+    "styled-icons": "^10.47.0",
     "uid": "^2.0.1"
   }
 }

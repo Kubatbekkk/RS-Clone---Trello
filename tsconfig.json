@@ -1,11 +1,6 @@
 {
     "compilerOptions": {
-        "lib":
-      [
-        "dom",
-        "dom.iterable",
-        "esnext"
-     ],
+        "lib": ["DOM", "DOM.Iterable", "ESNext"],
         "noEmit": true,
         //Type checking configuration
         "allowUnreachableCode": false,
@@ -28,7 +23,7 @@
         "strictPropertyInitialization": true,
         "useUnknownInCatchVariables": true,
         //Modules configuration
-        "baseUrl": "./",
+        "baseUrl": ".",
         "module": "ES2022",
         "moduleResolution": "node",
         //Language and env config
@@ -41,5 +36,6 @@
         "isolatedModules": true,
     },
     "include": ["src/**/**/*", "webpack.config.js"],
-    "exclude": ["node_modules"]
+    "exclude": ["node_modules"],
+    "files": ["./src/types.d.ts"]
 }
