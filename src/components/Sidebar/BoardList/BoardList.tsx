@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-redeclare */
 import React from 'react';
-import IBoardItemProps from '../BoardItem';
+import BoardItem from '../BoardItem';
 import { StyledBoardsList } from './styles';
 
 interface IBoardItemProps {
@@ -20,7 +20,7 @@ const BoardList = () => (
       <h2>Your boards</h2>
       {boards && boards.length > 0 ? (
         boards.map((board: IBoardItemProps) => (
-          <IBoardItemProps key={board.id} props={board} />
+          <BoardItem key={board.id} props={board} />
         ))
       ) : (<h2 className='createNewBoard'>Create new board</h2>)}
     </>
