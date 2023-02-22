@@ -11,6 +11,7 @@ import { dark } from './styles/theme';
 import GlobalStyle from './styles/GlobalStyles';
 import Navbar from './components/Navbar';
 import Sidebar from './components/Sidebar';
+import Container from './components/Utils/Container';
 // import AppRoutes from './routes';
 
 function App() {
@@ -19,10 +20,12 @@ function App() {
       <Router>
         <Navbar />
         <Sidebar />
-        <Routes>
-          <Route path='/' element={<Home />} />
-          <Route path="/board" element={<Board />} />
-        </Routes>
+        <Container>
+          <Routes>
+            <Route path='/' element={<Home />} />
+            <Route path="/board" element={<Board />} />
+          </Routes>
+        </Container>
       </Router>
       <GlobalStyle />
     </ThemeProvider>
