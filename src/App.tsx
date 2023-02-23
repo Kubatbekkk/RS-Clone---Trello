@@ -12,6 +12,7 @@ import GlobalStyle from './styles/GlobalStyles';
 import Navbar from './components/Navbar';
 import Sidebar from './components/Sidebar';
 import Container from './components/Utils/Container';
+import Register from './pages/Register';
 // import AppRoutes from './routes';
 
 function App() {
@@ -24,6 +25,7 @@ function App() {
           <Routes>
             <Route path='/' element={<Home />} />
             <Route path="/board" element={<Board />} />
+            <Route path="/register" element={<Register />} />
           </Routes>
         </Container>
       </Router>

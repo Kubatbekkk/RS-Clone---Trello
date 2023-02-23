@@ -35,7 +35,7 @@
         "esModuleInterop": true,
         "isolatedModules": true,
     },
-    "include": ["src", "webpack.config.js"],
+    "include": ["src/**/**/*", "webpack.config.js", "firebase.ts"],
     "exclude": ["node_modules"],
     "files": ["./src/types.d.ts"]
 }

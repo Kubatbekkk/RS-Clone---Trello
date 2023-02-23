@@ -1,45 +1,84 @@
-import React, { useState, useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
+import { signOut } from 'firebase/auth';
+import React, { useState, useEffect, useCallback } from 'react';
+import { useAuthState } from 'react-firebase-hooks/auth';
+import { useNavigate, useLocation } from 'react-router-dom';
 import Button from 'src/components/Utils/Button';
+import { auth } from 'src/config/Firebase';
 import NotesIcon from '../../assets/notes-icon.svg';
+import TodoForm from '../TodoForm';
 import { StyledNavbar } from './styles';
 
 const Navbar = (): JSX.Element => {
   const [actualPage, setActualPage] = useState('');
+  const [openNewTask, setOpenNewTask] = useState(false);
+  const [username, setUsername] = useState('user-is-not-logged-in');
 
   const { pathname } = useLocation();
-  // const navigate = useNavigate();
+
+  const navigate = useNavigate();
+
+  const [user] = useAuthState(auth);
+
+  const getUsername = useCallback(() => {
+    if (user && !user.displayName && user.email) {
+      setUsername(user.email.split('@')[0]);
+    } else if (user && user.displayName) {
+      setUsername(user.displayName);
+    }
+    return '';
+  }, [user]);
+
+  const logoutUser = async () => {
+    await signOut(auth);
+    navigate('/login');
+  };
+
+  // const getUser = useCallback(() => getUsername(), [getUsername]);
+
+  useEffect(() => {
+    getUsername();
+  }, [getUsername]);
 
   useEffect(() => {
     if (pathname.slice(0, 6) === '/board') setActualPage('Your tasks');
     // if (pathname.slice(0, 6) === "/login") setActualPage("Login");
-    // if (pathname.slice(0, 9) === "/register") setActualPage("Register");
+    if (pathname.slice(0, 9) === '/register') setActualPage('Register');
     if (pathname === '/') setActualPage('Boards');
   }, [pathname]);
   return (
-    <StyledNavbar>
-      <div className="sectionName">
-        <img src={NotesIcon} alt='notes-icon' />
-        <h1>{actualPage}</h1>
-      </div>
-      <div />
-      <div>
-        {actualPage === 'Your tasks' && (
-        <Button
-          text="+"
-          height="40px"
-          width="40px"
-        />
-        )}
+    <>
+      <TodoForm open={openNewTask} onClose={() => setOpenNewTask(false)} />
+      <StyledNavbar>
+        <div className="sectionName">
+          <img src={NotesIcon} alt='notes-icon' />
+          <h1>{actualPage}</h1>
+        </div>
+        <div />
+        <div>
+          {actualPage === 'Your tasks' && (
+          <Button
+            text="+"
+            height="40px"
+            width="40px"
+            onClick={() => setOpenNewTask(true)}
+          />
+          )}
 
-        <p>Hello, Username</p>
-        <Button
-          text="Logout"
-          width="80px"
-          height="30px"
-        />
-      </div>
-    </StyledNavbar>
+          <p>{user ? `Hello, ${username}` : 'Welcome'}</p>
+          {
+          user && (
+            <Button
+              text="Logout"
+              width="80px"
+              height="30px"
+              onClick={logoutUser}
+            />
+          )
+        }
+
+        </div>
+      </StyledNavbar>
+    </>
   );
 };
 
