@@ -13,6 +13,7 @@ import Navbar from './components/Navbar';
 import Sidebar from './components/Sidebar';
 import Container from './components/Utils/Container';
 import Register from './pages/Register';
+import Login from './pages/Login';
 // import AppRoutes from './routes';
 
 function App() {
@@ -26,6 +27,7 @@ function App() {
             <Route path='/' element={<Home />} />
             <Route path="/board" element={<Board />} />
             <Route path="/register" element={<Register />} />
+            <Route path="/login" element={<Login />} />
           </Routes>
         </Container>
       </Router>

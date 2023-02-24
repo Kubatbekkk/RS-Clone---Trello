@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const StyledLogin = styled.div`
+export const StyledRegister = styled.div`
 height: 100%;
 display: flex;
 align-items: center;

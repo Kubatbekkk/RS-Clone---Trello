@@ -9,7 +9,7 @@ import { auth, provider } from 'src/config/Firebase';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import Input from '../../components/Utils/Input';
 import Button from '../../components/Utils/Button';
-import { StyledLogin } from './styles';
+import { StyledRegister } from './styles';
 
 const Register = () => {
   const [email, setEmail] = useState('');
@@ -74,7 +74,7 @@ const Register = () => {
 
   if (loading) return <p>Loading...</p>;
   return (
-    <StyledLogin>
+    <StyledRegister className="animeBottom">
       <div className='head'>
         <h1>Register</h1>
         <p>Register your new account</p>
@@ -114,10 +114,10 @@ const Register = () => {
             variant
           />
           {wrongCredentials && <p className='errorMsg'>{wrongCredentials}</p>}
-          <Link to='/login'>Login to your account</Link>
+          <Link to='/login'>Login to your account.</Link>
         </form>
       </div>
-    </StyledLogin>
+    </StyledRegister>
   );
 };
 export default Register;
