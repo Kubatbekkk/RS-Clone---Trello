@@ -14,24 +14,27 @@ import Sidebar from './components/Sidebar';
 import Container from './components/Utils/Container';
 import Register from './pages/Register';
 import Login from './pages/Login';
+import BoardsProvider from './contexts/boardsContext';
 // import AppRoutes from './routes';
 
 function App() {
   return (
     <ThemeProvider theme={dark}>
-      <Router>
-        <Navbar />
-        <Sidebar />
-        <Container>
-          <Routes>
-            <Route path='/' element={<Home />} />
-            <Route path="/board" element={<Board />} />
-            <Route path="/register" element={<Register />} />
-            <Route path="/login" element={<Login />} />
-          </Routes>
-        </Container>
-      </Router>
-      <GlobalStyle />
+      <BoardsProvider>
+        <Router>
+          <Navbar />
+          <Sidebar />
+          <Container>
+            <Routes>
+              <Route path='/' element={<Home />} />
+              <Route path="/board/:id" element={<Board />} />
+              <Route path="/register" element={<Register />} />
+              <Route path="/login" element={<Login />} />
+            </Routes>
+          </Container>
+        </Router>
+        <GlobalStyle />
+      </BoardsProvider>
     </ThemeProvider>
   );
 }

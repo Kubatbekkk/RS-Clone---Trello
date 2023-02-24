@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import CloseIcon from 'src/assets/close.png';
+import { BoardsContext } from 'src/contexts/boardsContext';
 import Input from '../../Utils/Input';
 import Button from '../../Utils/Button';
 import { StyledNewBoard } from './styles';
@@ -13,7 +14,7 @@ const NewBoard = ({ open, onClose }: INewBoard) => {
   const [name, setName] = useState('');
   const [error, setError] = useState('');
 
-  //   const { createNewBoard } = useContext(BoardsContext);
+  const { createNewBoard } = useContext(BoardsContext);
 
   const createBoard = (e: React.FormEvent) => {
     e.preventDefault();
@@ -21,7 +22,7 @@ const NewBoard = ({ open, onClose }: INewBoard) => {
     if (!name) return setError('Board name cannot be blank');
     setError('');
     setName('');
-    // createNewBoard(name);
+    createNewBoard(name);
     onClose();
     return null;
   };

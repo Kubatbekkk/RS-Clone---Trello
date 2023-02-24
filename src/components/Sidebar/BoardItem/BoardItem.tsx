@@ -1,7 +1,6 @@
 import React from 'react';
 import NotesIcon from 'src/assets/notes-icon.svg';
 import { useNavigate } from 'react-router-dom';
-// import PropTypes from 'prop-types';
 import { StyledBoardItem } from './styles';
 
 interface ItemProps {
@@ -25,10 +24,4 @@ const BoardItem = ({ props }: ItemProps) => {
   );
 };
 
-// BoardItem.propTypes = {
-//   props: PropTypes.shape({
-//     id: PropTypes.string.isRequired,
-//     name: PropTypes.string.isRequired,
-//   }).isRequired,
-// };
 export default BoardItem;

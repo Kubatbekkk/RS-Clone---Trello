@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-redeclare */
-import React from 'react';
+import React, { useContext, useEffect } from 'react';
+import { BoardsContext } from 'src/contexts/boardsContext';
 import BoardItem from '../BoardItem';
 import { StyledBoardsList } from './styles';
 
@@ -9,22 +10,25 @@ interface IBoardItemProps {
   name: string
 }
 
-const boards: IBoardItemProps[] = [
-  { ownerId: 'kubat', id: '1', name: 'Board1' },
-  { ownerId: 'kubat', id: '2', name: 'Board2' },
-];
+const BoardList = () => {
+  const { boards, getBoards } = useContext(BoardsContext);
 
-const BoardList = () => (
-  <StyledBoardsList>
-    <>
-      <h2>Your boards</h2>
-      {boards && boards.length > 0 ? (
-        boards.map((board: IBoardItemProps) => (
-          <BoardItem key={board.id} props={board} />
-        ))
-      ) : (<h2 className='createNewBoard'>Create new board</h2>)}
-    </>
-  </StyledBoardsList>
-);
+  useEffect(() => {
+    getBoards();
+  }, [getBoards]);
+
+  return (
+    <StyledBoardsList>
+      <>
+        <h2>Your boards</h2>
+        {boards && boards.length > 0 ? (
+          boards.map((board: IBoardItemProps) => (
+            <BoardItem key={board.id} props={board} />
+          ))
+        ) : (<h2 className='createNewBoard'>Create new board</h2>)}
+      </>
+    </StyledBoardsList>
+  );
+};
 
 export default BoardList;
