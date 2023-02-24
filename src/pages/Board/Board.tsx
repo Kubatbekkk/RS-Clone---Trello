@@ -5,7 +5,12 @@ import { StyledBoard } from './styles';
 const Board = () => {
   const { id } = useParams();
 
-  return (<StyledBoard>Board</StyledBoard>);
+  return (
+    <StyledBoard>
+      Board:
+      {id}
+    </StyledBoard>
+  );
 };
 
 export default Board;

@@ -29,6 +29,7 @@
         "no-restricted-exports": "off",
         "@typescript-eslint/ban-ts-comment": "off",
         "@typescript-eslint/no-shadow": "off",
+        "consistent-return": "off",
         "react/function-component-definition": [
             2,
             {
