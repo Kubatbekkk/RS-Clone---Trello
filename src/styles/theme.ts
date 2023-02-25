@@ -58,4 +58,4 @@ export interface IThemeProps {
   theme: typeof dark | typeof light;
 }
 
-export { dark, light };
+export const theme = { dark, light };

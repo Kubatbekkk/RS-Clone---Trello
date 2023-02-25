@@ -23,7 +23,7 @@ export const StyledBoardsGridItem = styled.div`
 
       img {
         width: 27px;
-        filter: grayscale(1) invert(1);
+        filter: grayscale(0.5) invert(0.5);
       }
 
       p {
@@ -41,7 +41,7 @@ export const StyledBoardsGridItem = styled.div`
 
       &:hover {
         transform: scale(1.05);
-        filter: brightness(1.3);
+        filter: brightness(0.8);
       }
 
       .deleteBoard {
@@ -57,7 +57,7 @@ export const StyledBoardsGridItem = styled.div`
         button {
           background: transparent;
           font-size: ${(props) => props.theme.fontSizes.md};
-          font-family: "Poppins", sans-serif;
+          font-family: "Montserrat", sans-serif;
           color: ${(props) => props.theme.textColors.primary};
           border: none;
           margin-right: 30px;
