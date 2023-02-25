@@ -28,9 +28,9 @@ interface IBoardsContext {
   tasks: ITask[] | null;
   createNewBoard: (name: string) => void
   getBoards: () => void
+  getTasks: (boardId: string) => void;
+  createNewTask: ({ boardId, name, description }: ITask) => void
 }
-
-type TaskStatus = 'todo' | 'doing' | 'done';
 
 export const BoardsContext = createContext({} as IBoardsContext);
 
@@ -89,12 +89,48 @@ const BoardsProvider = ({ children }: { children: ReactNode }): JSX.Element => {
     }
   };
 
+  const createNewTask = async ({
+    boardId, name, description, status,
+  }: ITask) => {
+    if (user) {
+      try {
+        await addDoc(tasksCollection, {
+          boardId,
+          name,
+          description,
+          status,
+          ownerId: user.uid,
+          createdAt: new Date(),
+        });
+        getBoards();
+      } catch (err) {
+        if (err instanceof Error) console.error(err);
+      }
+    }
+  };
+
+  const getTasks = async (boardId: string) => {
+    if (user) {
+      const tasksQuery = query(
+        tasksCollection,
+        where('boardId', '==', boardId),
+      );
+      const tasksDocs = await getDocs(tasksQuery);
+      setTasks(tasksDocs.docs.map((task) => ({
+        ...task.data(),
+        id: task.id,
+      })) as ITask[]);
+    }
+  };
+
   return (
     <BoardsContext.Provider value={{
       boards,
       tasks,
       createNewBoard,
       getBoards,
+      getTasks,
+      createNewTask,
     }}
     >
       {children}

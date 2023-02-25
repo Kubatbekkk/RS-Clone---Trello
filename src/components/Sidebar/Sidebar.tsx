@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import Menu from 'src/assets/menu.png';
 import Close from 'src/assets/close.png';
+import { useAuthState } from 'react-firebase-hooks/auth';
+import { auth } from 'src/config/Firebase';
 import NewBoard from './NewBoard';
 import { StyledSidebar } from './styles';
 import Button from '../Utils/Button';
@@ -10,7 +12,8 @@ import BoardsList from './BoardList';
 const Sidebar = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [isNewBoardOpen, setIsNewBoardOpen] = useState<boolean>(false);
-  const user = true;
+
+  const [user] = useAuthState(auth);
 
   const location = useLocation();
   const navigate = useNavigate();

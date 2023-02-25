@@ -1,4 +1,8 @@
-import React, { useState } from 'react';
+/* eslint-disable react-hooks/exhaustive-deps */
+import React, { useContext, useEffect, useState } from 'react';
+import type { Status } from 'src/types/boardsAndTasks';
+import { BoardsContext } from 'src/contexts/boardsContext';
+import { useLocation } from 'react-router-dom';
 import { StyledTodoForm } from './styles';
 import CloseIcon from '../../assets/close.png';
 import Input from '../Utils/Input';
@@ -9,13 +13,21 @@ interface ITodoForm {
   onClose: () => void
 }
 
-type StatusType = 'todo' | 'doing' | 'done';
-
 const TodoForm = ({ open, onClose }: ITodoForm) => {
   const [name, setName] = useState<string>('');
   const [error, setError] = useState<string>('');
   const [description, setDescription] = useState<string>('');
-  const [status, setStatus] = useState<StatusType>('todo');
+  const [status, setStatus] = useState<Status>('todo');
+
+  const location = useLocation();
+
+  useEffect(() => {
+    if (location.pathname.slice(0, 6) !== '/board') onClose();
+  }, [location]);
+
+  const { createNewTask, getTasks } = useContext(BoardsContext);
+
+  const boardId = location.pathname.slice(7, location.pathname.length);
 
   const createTask = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -24,6 +36,17 @@ const TodoForm = ({ open, onClose }: ITodoForm) => {
       return;
     }
     setError('');
+    createNewTask({
+      boardId,
+      name,
+      description,
+      status,
+    });
+    getTasks(boardId);
+    onClose();
+    setDescription('');
+    setName('');
+    setStatus('todo');
   };
 
   if (!open) return null;
@@ -67,7 +90,7 @@ const TodoForm = ({ open, onClose }: ITodoForm) => {
             name="taskStatus"
             id="taskStatus"
             value={status}
-            onChange={({ target }) => setStatus(target.value as StatusType)}
+            onChange={({ target }) => setStatus(target.value as Status)}
           >
             <option value="todo">Todo</option>
             <option value="doing">Doing</option>

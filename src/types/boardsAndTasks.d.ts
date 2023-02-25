@@ -16,3 +16,5 @@ export interface IBoard {
   done?: ITask[];
   createdAt?: Date;
 }
+
+export type Status = 'todo' | 'doing' | 'done';

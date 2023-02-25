@@ -24,7 +24,7 @@ const Home = () => {
       navigate('/login');
     }
     setLoading(false);
-  }, [navigate, user]);
+  }, [user]);
 
   useEffect(() => {
     if (user) {
@@ -34,8 +34,8 @@ const Home = () => {
     }
   }, [user]);
 
-  if (loading) return (<h1>Loading...</h1>);
-  console.log(boards);
+  if (loading) return <h1>Loading...</h1>;
+  console.log('watch');
   return (
     <StyledHome>
       {!boards || boards.length < 1 ? (
@@ -45,7 +45,7 @@ const Home = () => {
           emptyBoard
         />
       ) : (
-      // @ts-ignore
+        // @ts-ignore
         <BoardsGrid>
           <>
             {boards.map((board) => (

@@ -1,13 +1,11 @@
 import React, { useState } from 'react';
+import type { Status } from 'src/types/boardsAndTasks';
 import { StyledChangeStatus } from './styles';
 
 import CloseIcon from '../../../assets/close.png';
-
 import Button from '../../Utils/Button';
 
 // import { BoardsContext } from '../../../contexts/boardsContext';
-
-type Status = 'todo' | 'doing' | 'done';
 
 interface IChangeStatus {
   open: boolean;
@@ -17,13 +15,13 @@ interface IChangeStatus {
   boardId: string;
 }
 
-function ChangeStatus({
+const ChangeStatus = ({
   open,
   onClose,
   id,
   actualStatusValue,
   boardId,
-}: IChangeStatus) {
+}: IChangeStatus) => {
   const [actualStatus, setActualStatus] = useState<Status>(actualStatusValue);
 
   const oldStatusValue = actualStatusValue;
@@ -34,9 +32,7 @@ function ChangeStatus({
 
   const changeTaskStatus = (e: React.FormEvent) => {
     e.preventDefault();
-
     if (oldStatusValue === actualStatus) return onClose();
-
     // updateTask(id, actualStatus, boardId);
     onClose();
   };
@@ -79,6 +75,6 @@ function ChangeStatus({
       </form>
     </StyledChangeStatus>
   );
-}
+};
 
 export default ChangeStatus;
