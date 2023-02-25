@@ -7,6 +7,7 @@ import { auth } from 'src/config/Firebase';
 import NotesIcon from '../../assets/notes-icon.svg';
 import TodoForm from '../TodoForm';
 import { StyledNavbar } from './styles';
+import ThemeSwitch from './ThemeSwitch';
 
 const Navbar = (): JSX.Element => {
   const [actualPage, setActualPage] = useState('');
@@ -43,6 +44,7 @@ const Navbar = (): JSX.Element => {
     if (pathname.slice(0, 9) === '/register') setActualPage('Register');
     if (pathname === '/') setActualPage('Boards');
   }, [pathname]);
+
   return (
     <>
       <TodoForm open={openNewTask} onClose={() => setOpenNewTask(false)} />
@@ -52,6 +54,9 @@ const Navbar = (): JSX.Element => {
           <h1>{actualPage}</h1>
         </div>
         <div />
+        <div className='themeToggle'>
+          <ThemeSwitch />
+        </div>
         <div>
           {actualPage === 'Your tasks' && (
             <Button

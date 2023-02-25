@@ -18,8 +18,9 @@ import BoardsProvider from './contexts/boardsContext';
 // import AppRoutes from './routes';
 
 function App() {
+  const isDarkTheme = false;
   return (
-    <ThemeProvider theme={theme.light}>
+    <ThemeProvider theme={isDarkTheme ? theme.dark : theme.light}>
       <BoardsProvider>
         <Router>
           <Navbar />
