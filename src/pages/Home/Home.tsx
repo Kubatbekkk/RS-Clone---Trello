@@ -2,12 +2,11 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { useNavigate } from 'react-router-dom';
-import BoardsGrid from 'src/components/BoardsGrid';
-import BoardsGridItem from 'src/components/BoardsGrid/BoardsGridItem';
 import EmptyImage from 'src/components/Utils/EmptyImage';
+import { BoardsGrid, BoardsGridItem } from '../../components/BoardsGrid';
 import { auth } from '../../config/Firebase';
 import { BoardsContext } from '../../contexts/boardsContext';
-import { StyledHome } from './styles';
+import { StyledHome, StyledLoading } from './styles';
 
 const Home = () => {
   const [loading, setLoading] = useState(false);
@@ -29,13 +28,22 @@ const Home = () => {
   useEffect(() => {
     if (user) {
       setLoading(true);
-      getBoards();
-      setLoading(false);
+      // eslint-disable-next-line func-names
+      (async function () {
+        await getBoards();
+      }()).then(() => setLoading(false));
     }
   }, [user]);
 
-  if (loading) return <h1>Loading...</h1>;
-  console.log('watch');
+  if (loading) {
+    return (
+      <StyledLoading>
+        <h1>
+          Loading...
+        </h1>
+      </StyledLoading>
+    );
+  }
   return (
     <StyledHome>
       {!boards || boards.length < 1 ? (
@@ -45,13 +53,15 @@ const Home = () => {
           emptyBoard
         />
       ) : (
-        // @ts-ignore
         <BoardsGrid>
-          <>
-            {boards.map((board) => (
-              <BoardsGridItem key={board.id} />
-            ))}
-          </>
+          {boards.map((board) => (
+            <BoardsGridItem
+              key={board.id}
+              id={board.id}
+              name={board.name}
+              tasks={{ todos: board.todos, done: board.done }}
+            />
+          ))}
         </BoardsGrid>
       )}
     </StyledHome>

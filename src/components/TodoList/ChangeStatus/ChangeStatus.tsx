@@ -1,11 +1,10 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import type { Status } from 'src/types/boardsAndTasks';
+import { BoardsContext } from 'src/contexts/boardsContext';
 import { StyledChangeStatus } from './styles';
 
 import CloseIcon from '../../../assets/close.png';
 import Button from '../../Utils/Button';
-
-// import { BoardsContext } from '../../../contexts/boardsContext';
 
 interface IChangeStatus {
   open: boolean;
@@ -23,17 +22,15 @@ const ChangeStatus = ({
   boardId,
 }: IChangeStatus) => {
   const [actualStatus, setActualStatus] = useState<Status>(actualStatusValue);
-
+  const { updateTask } = useContext(BoardsContext);
   const oldStatusValue = actualStatusValue;
 
   if (!open) return null;
 
-  //   const { updateTask } = useContext(BoardsContext);
-
   const changeTaskStatus = (e: React.FormEvent) => {
     e.preventDefault();
     if (oldStatusValue === actualStatus) return onClose();
-    // updateTask(id, actualStatus, boardId);
+    updateTask(id, actualStatus, boardId);
     onClose();
   };
 

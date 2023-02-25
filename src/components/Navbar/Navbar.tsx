@@ -33,15 +33,13 @@ const Navbar = (): JSX.Element => {
     navigate('/login');
   };
 
-  // const getUser = useCallback(() => getUsername(), [getUsername]);
-
   useEffect(() => {
     getUsername();
   }, [getUsername]);
 
   useEffect(() => {
     if (pathname.slice(0, 6) === '/board') setActualPage('Your tasks');
-    // if (pathname.slice(0, 6) === "/login") setActualPage("Login");
+    if (pathname.slice(0, 6) === '/login') setActualPage('Login');
     if (pathname.slice(0, 9) === '/register') setActualPage('Register');
     if (pathname === '/') setActualPage('Boards');
   }, [pathname]);
@@ -56,25 +54,25 @@ const Navbar = (): JSX.Element => {
         <div />
         <div>
           {actualPage === 'Your tasks' && (
-          <Button
-            text="+"
-            height="40px"
-            width="40px"
-            onClick={() => setOpenNewTask(true)}
-          />
+            <Button
+              text="+ Add task"
+              height="40px"
+              width="90px"
+              onClick={() => setOpenNewTask(true)}
+            />
           )}
 
           <p>{user ? `Hello, ${username}` : 'Welcome'}</p>
           {
-          user && (
-            <Button
-              text="Logout"
-              width="80px"
-              height="30px"
-              onClick={logoutUser}
-            />
-          )
-        }
+            user && (
+              <Button
+                text="Logout"
+                width="80px"
+                height="30px"
+                onClick={logoutUser}
+              />
+            )
+          }
 
         </div>
       </StyledNavbar>

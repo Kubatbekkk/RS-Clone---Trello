@@ -1,9 +1,10 @@
 /* eslint-disable react/jsx-no-constructed-context-values */
 import {
-  addDoc, collection, getDocs, query, where,
+  addDoc, collection, deleteDoc, doc, getDocs, query, updateDoc, where,
 } from 'firebase/firestore';
 import React, { createContext, ReactNode, useState } from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
+import type { Status } from 'src/types/boardsAndTasks';
 import { auth, db } from '../config/Firebase';
 
 interface ITask {
@@ -17,6 +18,7 @@ interface ITask {
 }
 
 interface IBoard {
+  done: ITask[] | undefined;
   ownerId: string;
   id: string;
   name: string;
@@ -30,6 +32,10 @@ interface IBoardsContext {
   getBoards: () => void
   getTasks: (boardId: string) => void;
   createNewTask: ({ boardId, name, description }: ITask) => void
+  updateTask: (taskId: string | undefined,
+    taskStatus: Status,
+    boardId: string) => void;
+  deleteBoard: (boardId: string) => void;
 }
 
 export const BoardsContext = createContext({} as IBoardsContext);
@@ -42,8 +48,6 @@ const BoardsProvider = ({ children }: { children: ReactNode }): JSX.Element => {
 
   const boardsCollection = collection(db, 'boards');
 
-  const tasksCollection = collection(db, 'tasks');
-
   const getBoards = async () => {
     if (user) {
       const boardsQuery = query(
@@ -53,6 +57,7 @@ const BoardsProvider = ({ children }: { children: ReactNode }): JSX.Element => {
       const boardsDocs = await getDocs(boardsQuery);
 
       const boardTasks = query(
+        // eslint-disable-next-line no-use-before-define, @typescript-eslint/no-use-before-define
         tasksCollection,
         where('ownerId', '==', user.uid),
       );
@@ -71,6 +76,7 @@ const BoardsProvider = ({ children }: { children: ReactNode }): JSX.Element => {
       );
     }
   };
+  const tasksCollection = collection(db, 'tasks');
 
   const createNewBoard = async (name: string) => {
     if (user) {
@@ -123,6 +129,36 @@ const BoardsProvider = ({ children }: { children: ReactNode }): JSX.Element => {
     }
   };
 
+  const updateTask = async (
+    taskId: string | undefined,
+    taskStatus: Status,
+    boardId: string,
+  ) => {
+    if (user && taskId) {
+      try {
+        const taskRef = doc(db, 'tasks', taskId);
+        await updateDoc(taskRef, {
+          status: taskStatus,
+        });
+        getTasks(boardId);
+      } catch (err) {
+        if (err instanceof Error) console.error(err.message);
+      }
+    }
+  };
+
+  const deleteBoard = async (boardId: string) => {
+    if (user) {
+      try {
+        const boardRef = doc(db, 'boards', boardId);
+        await deleteDoc(boardRef);
+        getBoards();
+      } catch (err) {
+        if (err instanceof Error) console.error(err.message);
+      }
+    }
+  };
+
   return (
     <BoardsContext.Provider value={{
       boards,
@@ -131,6 +167,8 @@ const BoardsProvider = ({ children }: { children: ReactNode }): JSX.Element => {
       getBoards,
       getTasks,
       createNewTask,
+      updateTask,
+      deleteBoard,
     }}
     >
       {children}
