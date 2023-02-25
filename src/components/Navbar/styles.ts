@@ -23,7 +23,7 @@ export const StyledNavbar = styled.nav`
   }
 
   img {
-    filter: grayscale(1) invert(1);
+    filter: grayscale(.5) invert(.5);
     width: 32px;
     height: 32px;
   }

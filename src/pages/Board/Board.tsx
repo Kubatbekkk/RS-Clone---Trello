@@ -30,8 +30,6 @@ const Board = () => {
           />
         ) : (<TodoList tasks={tasks} boardId={id || '1'} />)
       }
-      Board:
-      {id}
     </StyledBoard>
   );
 };

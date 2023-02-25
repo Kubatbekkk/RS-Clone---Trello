@@ -7,7 +7,7 @@ import {
 import { ThemeProvider } from 'styled-components';
 import Home from './pages/Home';
 import Board from './pages/Board';
-import { dark } from './styles/theme';
+import { light } from './styles/theme';
 import GlobalStyle from './styles/GlobalStyles';
 import Navbar from './components/Navbar';
 import Sidebar from './components/Sidebar';
@@ -19,7 +19,7 @@ import BoardsProvider from './contexts/boardsContext';
 
 function App() {
   return (
-    <ThemeProvider theme={dark}>
+    <ThemeProvider theme={light}>
       <BoardsProvider>
         <Router>
           <Navbar />

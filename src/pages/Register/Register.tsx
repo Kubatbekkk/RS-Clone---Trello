@@ -73,7 +73,7 @@ const Register = () => {
 
   if (loading) return <p>Loading...</p>;
   return (
-    <StyledRegister className="animeBottom">
+    <StyledRegister>
       <div className='head'>
         <h1>Register</h1>
         <p>Register your new account</p>
@@ -110,7 +110,7 @@ const Register = () => {
             height='50px'
             width='100%'
             text='Register with Google'
-            variant
+            variant={false}
           />
           {wrongCredentials && <p className='errorMsg'>{wrongCredentials}</p>}
           <Link to='/login'>Login to your account.</Link>

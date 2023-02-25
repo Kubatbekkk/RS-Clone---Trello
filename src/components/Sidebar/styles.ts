@@ -90,6 +90,9 @@ export const StyledSidebar = styled.aside<Props>`
 
   .github {
     position: absolute;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
     bottom: 15px;
   }
 `;

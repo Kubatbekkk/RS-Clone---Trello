@@ -10,9 +10,9 @@ export const StyledBoardItem = styled.li<Props>`
     justify-content: space-between;
     padding: 13px 15px;
     border: 1px solid
-        $(props => props.active
-                    ? props.theme.utils.itemSelectedOrBorderOrButton
-                    : props.theme.textColors.primary);
+        ${((props) => (props.active
+    ? props.theme.utils.itemSelectedOrBorderOrButton
+    : props.theme.textColors.primary))};
     border-radius: 15px;
     margin-bottom: 14px;
     cursor: pointer;
@@ -25,7 +25,7 @@ export const StyledBoardItem = styled.li<Props>`
 
         img {
             width: 19px;
-            filter: grayscale(1) invert(1);
+            filter: grayscale(.5) invert(.5);
         }
 
         div {

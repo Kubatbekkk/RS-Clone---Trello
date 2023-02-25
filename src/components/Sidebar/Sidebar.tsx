@@ -84,15 +84,32 @@ const Sidebar = () => {
             />
           </div>
         )}
-        <a
-          href="https://github.com/Kubatbekkk"
-          target="_blank"
-          className="github"
-          aria-label="visit Kubatbekkk github"
-          rel="noreferrer"
-        >
-          @Kubatbekkk
-        </a>
+        <div className="github">
+          <a
+            href="https://github.com/Kubatbekkk"
+            target="_blank"
+            aria-label="visit Kubatbekkk github"
+            rel="noreferrer"
+          >
+            Kubat: React/typescript
+          </a>
+          <a
+            href="https://github.com/Kubatbekkk"
+            target="_blank"
+            aria-label="visit Kubatbekkk github"
+            rel="noreferrer"
+          >
+            Elena: managing
+          </a>
+          <a
+            href="https://github.com/Kubatbekkk"
+            target="_blank"
+            aria-label="visit Kubatbekkk github"
+            rel="noreferrer"
+          >
+            Vlad: design
+          </a>
+        </div>
       </StyledSidebar>
     </>
   );

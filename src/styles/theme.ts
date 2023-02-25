@@ -2,17 +2,17 @@ const dark = {
   name: 'dark',
   textColors: {
     primary: '#FFFFFF',
-    secondary: '#D8D8D8',
+    secondary: '#DBEDF3',
   },
   backgroundColors: {
-    main: '#0D0C1B',
-    menu: '#0D0C1B',
-    item: '#24214A',
-    delete: '#5049A5',
+    main: '#283149',
+    menu: '#404B69',
+    item: '#00818A',
+    delete: '#3C6562',
   },
   utils: {
-    itemSelectedOrBorderOrButton: '#B19DFF',
-    todoListBorder: '#6E63FF',
+    itemSelectedOrBorderOrButton: '#2D6E7E',
+    todoListBorder: '#153B44',
   },
   status: {
     todo: '#BF2782',
@@ -27,20 +27,20 @@ const dark = {
 };
 
 const light = {
-  name: 'dark',
+  name: 'light',
   textColors: {
-    primary: '#FFFFFF',
-    secondary: '#D8D8D8',
+    primary: '#20262E',
+    secondary: '#86A3B8',
   },
   backgroundColors: {
-    main: 'grey',
-    menu: '#0D0C1B',
-    item: '#24214A',
-    delete: '#5049A5',
+    main: '#FFF1DC',
+    menu: '#F7EFE5',
+    item: '#EEEEEE',
+    delete: '#E8D5C4',
   },
   utils: {
-    itemSelectedOrBorderOrButton: '#B19DFF',
-    todoListBorder: '#6E63FF',
+    itemSelectedOrBorderOrButton: '#E8D5C4',
+    todoListBorder: '#E8D2A6',
   },
   status: {
     todo: '#BF2782',

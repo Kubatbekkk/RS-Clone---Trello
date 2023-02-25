@@ -87,7 +87,7 @@ const Login = () => {
   if (loading) return null;
 
   return (
-    <StyledLogin className="animeBottom">
+    <StyledLogin>
       <div className="head">
         <h1>Login</h1>
         <p>Enter your account</p>
