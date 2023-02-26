@@ -7,7 +7,13 @@ export const StyledSwitch = styled.div`
         align-items: center;
         cursor: pointer;
 
-
+        > span {
+            > img {
+                filter: grayscale(-2) invert(.8);
+                width: 30px;
+                height: 30px;
+            }
+        }
         > div {
             position: relative;
             width: 60px;
