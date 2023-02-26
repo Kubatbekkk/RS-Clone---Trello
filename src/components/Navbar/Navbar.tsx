@@ -10,7 +10,7 @@ import TodoForm from '../TodoForm';
 import { StyledNavbar } from './styles';
 import ThemeSwitch from './ThemeSwitch';
 
-const Navbar = ({ isDarkTheme, setIsDarkTheme }: ThemeProps): JSX.Element => {
+const Navbar = ({ isDarkTheme, handleThemeSwitch }: ThemeProps): JSX.Element => {
   const [actualPage, setActualPage] = useState('');
   const [openNewTask, setOpenNewTask] = useState(false);
   const [username, setUsername] = useState('user-is-not-logged-in');
@@ -58,7 +58,7 @@ const Navbar = ({ isDarkTheme, setIsDarkTheme }: ThemeProps): JSX.Element => {
         <div className='themeToggle'>
           <ThemeSwitch
             isDarkTheme={isDarkTheme}
-            setIsDarkTheme={setIsDarkTheme}
+            handleThemeSwitch={handleThemeSwitch}
           />
         </div>
         <div>

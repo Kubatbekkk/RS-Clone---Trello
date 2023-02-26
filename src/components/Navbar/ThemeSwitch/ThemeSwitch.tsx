@@ -2,20 +2,18 @@ import React from 'react';
 import type { ThemeProps } from 'src/types/boardsAndTasks';
 import { StyledSwitch } from './styles';
 
-const ThemeSwitch = ({ isDarkTheme, setIsDarkTheme }: ThemeProps) => (
-
+const ThemeSwitch = ({ isDarkTheme, handleThemeSwitch }: ThemeProps) => (
   <StyledSwitch>
     <label htmlFor="switch">
-      <span>{!isDarkTheme ? 'Light' : 'Dark'}</span>
+      <span>{isDarkTheme ? 'Dark' : 'Light'}</span>
       <input
         type="checkbox"
         checked={isDarkTheme}
         id='switch'
-        onChange={() => setIsDarkTheme(!isDarkTheme)}
+        onChange={handleThemeSwitch}
       />
       <div />
     </label>
   </StyledSwitch>
 );
-
 export default ThemeSwitch;

@@ -17,13 +17,22 @@ import Login from './pages/Login';
 import BoardsProvider from './contexts/boardsContext';
 // import AppRoutes from './routes';
 
-function App() {
-  const [isDarkTheme, setIsDarkTheme] = useState(false);
+const App = () => {
+  const [isDarkTheme, setIsDarkTheme] = useState(() => {
+    const storedTheme = localStorage.getItem('theme');
+    return storedTheme ? JSON.parse(storedTheme) : true;
+  });
+
+  const handleThemeSwitch = () => {
+    const newIsDarkTheme = !isDarkTheme;
+    setIsDarkTheme(newIsDarkTheme);
+    localStorage.setItem('theme', JSON.stringify(newIsDarkTheme));
+  };
   return (
     <ThemeProvider theme={isDarkTheme ? theme.dark : theme.light}>
       <BoardsProvider>
         <Router>
-          <Navbar isDarkTheme={isDarkTheme} setIsDarkTheme={setIsDarkTheme} />
+          <Navbar isDarkTheme={isDarkTheme} handleThemeSwitch={handleThemeSwitch} />
           <Sidebar />
           <Container>
             <Routes>
@@ -38,6 +47,6 @@ function App() {
       </BoardsProvider>
     </ThemeProvider>
   );
-}
+};
 
 export default App;
