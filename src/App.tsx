@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   BrowserRouter as Router,
   Routes,
@@ -18,12 +18,12 @@ import BoardsProvider from './contexts/boardsContext';
 // import AppRoutes from './routes';
 
 function App() {
-  const isDarkTheme = false;
+  const [isDarkTheme, setIsDarkTheme] = useState(false);
   return (
     <ThemeProvider theme={isDarkTheme ? theme.dark : theme.light}>
       <BoardsProvider>
         <Router>
-          <Navbar />
+          <Navbar isDarkTheme={isDarkTheme} setIsDarkTheme={setIsDarkTheme} />
           <Sidebar />
           <Container>
             <Routes>

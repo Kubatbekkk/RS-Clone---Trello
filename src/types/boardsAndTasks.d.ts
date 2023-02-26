@@ -18,3 +18,8 @@ export interface IBoard {
 }
 
 export type Status = 'todo' | 'doing' | 'done';
+
+export interface ThemeProps {
+  isDarkTheme: boolean;
+  setIsDarkTheme: (isDarkTheme: boolean) => void;
+}

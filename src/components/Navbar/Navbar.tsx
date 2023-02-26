@@ -4,12 +4,13 @@ import { useAuthState } from 'react-firebase-hooks/auth';
 import { useNavigate, useLocation } from 'react-router-dom';
 import Button from 'src/components/Utils/Button';
 import { auth } from 'src/config/Firebase';
+import type { ThemeProps } from 'src/types/boardsAndTasks';
 import NotesIcon from '../../assets/notes-icon.svg';
 import TodoForm from '../TodoForm';
 import { StyledNavbar } from './styles';
 import ThemeSwitch from './ThemeSwitch';
 
-const Navbar = (): JSX.Element => {
+const Navbar = ({ isDarkTheme, setIsDarkTheme }: ThemeProps): JSX.Element => {
   const [actualPage, setActualPage] = useState('');
   const [openNewTask, setOpenNewTask] = useState(false);
   const [username, setUsername] = useState('user-is-not-logged-in');
@@ -55,7 +56,10 @@ const Navbar = (): JSX.Element => {
         </div>
         <div />
         <div className='themeToggle'>
-          <ThemeSwitch />
+          <ThemeSwitch
+            isDarkTheme={isDarkTheme}
+            setIsDarkTheme={setIsDarkTheme}
+          />
         </div>
         <div>
           {actualPage === 'Your tasks' && (
