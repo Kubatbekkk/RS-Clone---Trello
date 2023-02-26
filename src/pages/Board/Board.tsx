@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useContext, useEffect } from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import TodoList from 'src/components/TodoList';
 import EmptyImage from 'src/components/Utils/EmptyImage';
 import { auth } from 'src/config/Firebase';
@@ -13,11 +13,11 @@ const Board = () => {
 
   const { tasks, getTasks } = useContext(BoardsContext);
   const [user] = useAuthState(auth);
+  const navigate = useNavigate();
 
   useEffect(() => {
-    if (user && id) {
-      getTasks(id);
-    }
+    if (!user) navigate('/login');
+    else if (user && id) getTasks(id);
   }, [user, id]);
 
   return (

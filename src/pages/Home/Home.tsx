@@ -38,9 +38,7 @@ const Home = () => {
   if (loading) {
     return (
       <StyledLoading>
-        <h1>
-          Loading...
-        </h1>
+        <div />
       </StyledLoading>
     );
   }
