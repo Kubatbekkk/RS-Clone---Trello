@@ -1,10 +1,10 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const FaviconsWebpackPlugin = require('favicons-webpack-plugin');
 const EslintPlugin = require('eslint-webpack-plugin');
-const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+// const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const path = require('path');
 
-const isProd = true;
+// const isProd = false;
 
 module.exports = {
   entry: './src/index.tsx',
@@ -19,7 +19,7 @@ module.exports = {
     historyApiFallback: true,
   },
   plugins: [
-    isProd && new CleanWebpackPlugin(),
+    // isProd && new CleanWebpackPlugin(),
     new HtmlWebpackPlugin({
       template: './src/index.html',
     }),

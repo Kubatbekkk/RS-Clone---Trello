@@ -20,7 +20,7 @@ const Home = () => {
   useEffect(() => {
     setLoading(true);
     if (!user) {
-      navigate('/login');
+      navigate('/welcome');
     }
     setLoading(false);
   }, [user]);
