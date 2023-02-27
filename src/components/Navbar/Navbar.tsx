@@ -11,9 +11,9 @@ import { StyledNavbar } from './styles';
 import ThemeSwitch from './ThemeSwitch';
 
 const Navbar = ({ isDarkTheme, handleThemeSwitch }: ThemeProps): JSX.Element => {
-  const [actualPage, setActualPage] = useState('');
-  const [openNewTask, setOpenNewTask] = useState(false);
-  const [username, setUsername] = useState('user-is-not-logged-in');
+  const [actualPage, setActualPage] = useState<string>('');
+  const [openNewTask, setOpenNewTask] = useState<boolean>(false);
+  const [username, setUsername] = useState<string>('user-is-not-logged-in');
 
   const { pathname } = useLocation();
 
@@ -27,7 +27,6 @@ const Navbar = ({ isDarkTheme, handleThemeSwitch }: ThemeProps): JSX.Element => 
     } else if (user && user.displayName) {
       setUsername(user.displayName);
     }
-    return '';
   }, [user]);
 
   const logoutUser = async () => {
