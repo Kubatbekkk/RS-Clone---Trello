@@ -14,10 +14,10 @@ export const StyledTodoList = styled.div`
 
   ul {
     overflow-y: auto;
-    height: calc(700px - 55px);
+    height: calc(82.5vh - 55px);
     padding: 10px;
     list-style: none;
-    border: 1px solid ${(props) => props.theme.utils.todoListBorder};
+    border: 2px solid ${(props) => props.theme.utils.todoListBorder};
     border-radius: 15px;
 
     li {

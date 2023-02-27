@@ -27,7 +27,6 @@ const Navbar = ({ isDarkTheme, handleThemeSwitch }: ThemeProps): JSX.Element => 
     } else if (user && user.displayName) {
       setUsername(user.displayName);
     }
-    return '';
   }, [user]);
 
   const logoutUser = async () => {

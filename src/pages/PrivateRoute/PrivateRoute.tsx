@@ -6,8 +6,10 @@ import { auth } from 'src/config/Firebase';
 
 const PrivateRoute = ({ children }: { children: ReactNode }) => {
   const [user] = useAuthState(auth);
-  console.log(user);
-  if (!user) {
+  const checkUser = async () => {
+    await user;
+  };
+  if (!checkUser()) {
     return <Navigate to='/login' />;
   }
 

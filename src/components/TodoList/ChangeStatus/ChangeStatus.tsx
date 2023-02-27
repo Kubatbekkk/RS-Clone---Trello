@@ -63,7 +63,6 @@ const ChangeStatus = ({
         </div>
         <Button
           height="50px"
-          onClick={() => console.log('mudando')}
           text="Done"
           width="100%"
           type="submit"

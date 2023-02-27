@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, Suspense } from 'react';
 import {
   BrowserRouter as Router,
   Routes,
@@ -16,6 +16,7 @@ import Register from './pages/Register';
 import Login from './pages/Login';
 import BoardsProvider from './contexts/boardsContext';
 import PrivateRoute from './pages/PrivateRoute';
+import NotFound from './pages/NotFound';
 // import AppRoutes from './routes';
 
 const App = () => {
@@ -36,26 +37,29 @@ const App = () => {
           <Navbar isDarkTheme={isDarkTheme} handleThemeSwitch={handleThemeSwitch} />
           <Sidebar />
           <Container>
-            <Routes>
-              <Route
-                path='/'
-                element={(
-                  <PrivateRoute>
-                    <Home />
-                  </PrivateRoute>
-                )}
-              />
-              <Route
-                path="/board/:id"
-                element={(
-                  <PrivateRoute>
-                    <Board />
-                  </PrivateRoute>
-                )}
-              />
-              <Route path="/register" element={<Register />} />
-              <Route path="/login" element={<Login />} />
-            </Routes>
+            <Suspense fallback={<h1>Loading</h1>}>
+              <Routes>
+                <Route
+                  path='/'
+                  element={(
+                    <PrivateRoute>
+                      <Home />
+                    </PrivateRoute>
+                  )}
+                />
+                <Route
+                  path="/board/:id"
+                  element={(
+                    <PrivateRoute>
+                      <Board />
+                    </PrivateRoute>
+                  )}
+                />
+                <Route path="/register" element={<Register />} />
+                <Route path="/login" element={<Login />} />
+                <Route path="/*" element={<NotFound />} />
+              </Routes>
+            </Suspense>
           </Container>
         </Router>
         <GlobalStyle />

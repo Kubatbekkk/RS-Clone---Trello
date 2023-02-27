@@ -3,10 +3,11 @@ import React, { useContext, useEffect, useState } from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { useNavigate } from 'react-router-dom';
 import EmptyImage from 'src/components/Utils/EmptyImage';
+import Loading from 'src/components/Utils/Loading';
 import { BoardsGrid, BoardsGridItem } from '../../components/BoardsGrid';
 import { auth } from '../../config/Firebase';
 import { BoardsContext } from '../../contexts/boardsContext';
-import { StyledHome, StyledLoading } from './styles';
+import { StyledHome } from './styles';
 
 const Home = () => {
   const [loading, setLoading] = useState(false);
@@ -37,9 +38,7 @@ const Home = () => {
 
   if (loading) {
     return (
-      <StyledLoading>
-        <div />
-      </StyledLoading>
+      <Loading />
     );
   }
   return (
