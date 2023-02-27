@@ -6,6 +6,7 @@ export const StyledTodoList = styled.div`
   overflow-x: auto;
   gap: 20px;
   padding: 30px;
+  overflow-y: auto;
 
   @media (max-width: 1100px) {
     flex-direction: column;
@@ -13,8 +14,8 @@ export const StyledTodoList = styled.div`
   }
 
   ul {
-    overflow-y: auto;
-    height: calc(82.5vh - 55px);
+    overflow-y: hidden;
+    height: calc(80vh - 55px);
     padding: 10px;
     list-style: none;
     border: 2px solid ${(props) => props.theme.utils.todoListBorder};
