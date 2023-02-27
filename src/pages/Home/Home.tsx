@@ -1,7 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useContext, useEffect, useState } from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
-import { useNavigate } from 'react-router-dom';
 import EmptyImage from 'src/components/Utils/EmptyImage';
 import Loading from 'src/components/Utils/Loading';
 import { BoardsGrid, BoardsGridItem } from '../../components/BoardsGrid';
@@ -14,15 +13,10 @@ const Home = () => {
 
   const { boards, getBoards } = useContext(BoardsContext);
 
-  const navigate = useNavigate();
-
   const [user] = useAuthState(auth);
 
   useEffect(() => {
     setLoading(true);
-    if (!user) {
-      navigate('/welcome');
-    }
     setLoading(false);
   }, [user]);
 
