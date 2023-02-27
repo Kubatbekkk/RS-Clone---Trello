@@ -1,6 +1,10 @@
 import React from 'react';
-import { StyledLoading } from './styles';
+import { StyledLoading, SizeProps } from './styles';
 
-const Loading = () => <StyledLoading><div /></StyledLoading>;
+const Loading = ({ width, height }: SizeProps) => (
+  <StyledLoading width={width} height={height}>
+    <div />
+  </StyledLoading>
+);
 
 export default Loading;

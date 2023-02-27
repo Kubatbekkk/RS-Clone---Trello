@@ -1,5 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useContext, useEffect, useState } from 'react';
+import Loading from 'src/components/Utils/Loading';
 import { BoardsContext } from 'src/contexts/boardsContext';
 import BoardItem from '../BoardItem';
 import { StyledBoardsList } from './styles';
@@ -12,8 +13,9 @@ const BoardList = () => {
     setLoading(true);
     (async () => getBoards())().then(() => setLoading(false));
   }, []);
+
   if (loading) {
-    return <h1>Loading</h1>;
+    return <Loading width='20%' height='20%' />;
   }
   return (
     <StyledBoardsList>

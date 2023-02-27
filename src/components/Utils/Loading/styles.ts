@@ -8,10 +8,14 @@ const rotate360 = keyframes`
     transform: rotate(360deg);
   }
 `;
+export interface SizeProps {
+  width: string;
+  height: string;
+}
 
-export const StyledLoading = styled.div`
-  height: 100%;
-  width: 100%;
+export const StyledLoading = styled.div<SizeProps>`
+  height: ${(props) => props.height};
+  width: ${(props) => props.width};
   display: flex;
   align-items: center;
   justify-content: center;
@@ -25,8 +29,8 @@ export const StyledLoading = styled.div`
     border-bottom: 2px solid ${(props) => props.theme.backgroundColors.delete};
     border-left: 4px solid ${(props) => props.theme.textColors.primary};
     background: transparent;
-    width: 62px;
-    height: 62px;
+    width: ${(props) => (props.width === '100%' ? '62px' : '35px')};
+    height: ${(props) => (props.height === '100%' ? '62px' : '35px')};
     border-radius: 50%;
   }
 `;

@@ -1,4 +1,4 @@
-import React, { useState, Suspense } from 'react';
+import React, { useState } from 'react';
 import {
   BrowserRouter as Router,
   Routes,
@@ -37,29 +37,27 @@ const App = () => {
           <Navbar isDarkTheme={isDarkTheme} handleThemeSwitch={handleThemeSwitch} />
           <Sidebar />
           <Container>
-            <Suspense fallback={<h1>Loading</h1>}>
-              <Routes>
-                <Route
-                  path='/'
-                  element={(
-                    <PrivateRoute>
-                      <Home />
-                    </PrivateRoute>
-                  )}
-                />
-                <Route
-                  path="/board/:id"
-                  element={(
-                    <PrivateRoute>
-                      <Board />
-                    </PrivateRoute>
-                  )}
-                />
-                <Route path="/register" element={<Register />} />
-                <Route path="/login" element={<Login />} />
-                <Route path="/*" element={<NotFound />} />
-              </Routes>
-            </Suspense>
+            <Routes>
+              <Route
+                path='/'
+                element={(
+                  <PrivateRoute>
+                    <Home />
+                  </PrivateRoute>
+                )}
+              />
+              <Route
+                path="/board/:id"
+                element={(
+                  <PrivateRoute>
+                    <Board />
+                  </PrivateRoute>
+                )}
+              />
+              <Route path="/register" element={<Register />} />
+              <Route path="/login" element={<Login />} />
+              <Route path="/*" element={<NotFound />} />
+            </Routes>
           </Container>
         </Router>
         <GlobalStyle />

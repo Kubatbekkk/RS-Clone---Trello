@@ -38,7 +38,7 @@ const Home = () => {
 
   if (loading) {
     return (
-      <Loading />
+      <Loading height='100%' width='100%' />
     );
   }
   return (
