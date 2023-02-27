@@ -119,15 +119,13 @@ export const StyledSidebar = styled.aside<Props>`
 
   .school {
     margin-top: auto;
-    margin-left: 1.8rem;
-    align-self: stretch;
 
     > div {
       width: 120px;
       margin-bottom: 2rem;
 
       img {
-        max-width: 100%;
+        max-width: 80%;
         filter: grayscale(80%) opacity(.5) drop-shadow(2px 2px 2px gray);
         cursor: pointer;
         transition: all .3s;
