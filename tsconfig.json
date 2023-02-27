@@ -1,16 +1,6 @@
 {
     "compilerOptions": {
-        "lib":
-      [
-       "ES2015",
-        "ES2016",
-        "ES2017",
-        "ES2018",
-        "ES2019",
-        "ES2020",
-        "ESNext",
-        "DOM"
-     ],
+        "lib": ["DOM", "DOM.Iterable", "ESNext"],
         "noEmit": true,
         //Type checking configuration
         "allowUnreachableCode": false,
@@ -37,7 +27,7 @@
         "module": "ES2022",
         "moduleResolution": "node",
         //Language and env config
-        "target": "ES6",
+        "target": "ES5",
         "jsx": "react",
         //Js support config
         "allowJs": true,
@@ -45,6 +35,7 @@
         "esModuleInterop": true,
         "isolatedModules": true,
     },
-    "include": ["src/**/**/*", "webpack.config.js"],
-    "exclude": ["node_modules"]
+    "include": ["src/**/**/*", "webpack.config.js", "firebase.ts"],
+    "exclude": ["node_modules"],
+    "files": ["./src/types.d.ts"]
 }

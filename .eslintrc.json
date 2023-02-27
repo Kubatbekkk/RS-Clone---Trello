@@ -24,9 +24,21 @@
     "rules": {
         "@typescript-eslint/no-var-requires": "off",
         "@typescript-eslint/no-non-null-assertion": "off",
+        "react/prop-types": "off",
         "react/require-default-props": "off",
+        "no-restricted-exports": "off",
+        "@typescript-eslint/ban-ts-comment": "off",
+        "@typescript-eslint/no-shadow": "off",
+        "consistent-return": "off",
+        "react/function-component-definition": [
+            2,
+            {
+              "namedComponents":[ "function-declaration", "arrow-function"]
+            }
+          ],
         "comma-dangle": "off",
-        "import/no-extraneous-dependencies": ["error", {"devDependencies": true}],
+        "react/jsx-no-undef": "off",
+        "import/no-extraneous-dependencies": "off",
         "import/prefer-default-export": "off",
         "no-undef":"off",
         "no-debugger": "off",

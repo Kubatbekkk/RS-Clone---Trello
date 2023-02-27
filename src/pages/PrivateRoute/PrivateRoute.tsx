@@ -1,16 +1,21 @@
 /* eslint-disable react/jsx-no-useless-fragment */
-import React from 'react';
+import React, { ReactNode } from 'react';
+import { useAuthState } from 'react-firebase-hooks/auth';
 import { Navigate } from 'react-router-dom';
-import { useAuth } from 'src/contexts/AuthContext';
-import { AuthProviderProps } from '../types/types';
+import { auth } from 'src/config/Firebase';
 
-function PrivateRoute({ children }: AuthProviderProps): JSX.Element {
-  const { currentUser } = useAuth();
-
-  if (!currentUser) {
-    return <Navigate to="/login" />;
+const PrivateRoute = ({ children }: { children: ReactNode }) => {
+  const [user] = useAuthState(auth);
+  const checkUser = async () => {
+    await user;
+  };
+  if (!checkUser()) {
+    return <Navigate to='/login' />;
   }
-  return <>{children}</>;
-}
+
+  return (
+    <>{children}</>
+  );
+};
 
 export default PrivateRoute;

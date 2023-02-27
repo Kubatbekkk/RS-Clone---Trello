@@ -1,53 +1,69 @@
-/* eslint-disable react/no-array-index-key */
-import React from 'react';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import React, { useState } from 'react';
 import {
-  Home, NotFoundPage, BoardsPage, LoginPage,
-  SignUpPage, ProfilePage, PrivateRoute, ForgotPasswordPage,
-} from './pages';
-import { Footer, NavbarComponent } from './components';
-import { AuthProvider } from './contexts/AuthContext';
+  BrowserRouter as Router,
+  Routes,
+  Route,
+} from 'react-router-dom';
+import { ThemeProvider } from 'styled-components';
+import Home from './pages/Home';
+import Board from './pages/Board';
+import { theme } from './styles/theme';
+import GlobalStyle from './styles/GlobalStyles';
+import Navbar from './components/Navbar';
+import Sidebar from './components/Sidebar';
+import Container from './components/Utils/Container';
+import Register from './pages/Register';
+import Login from './pages/Login';
+import BoardsProvider from './contexts/boardsContext';
+import PrivateRoute from './pages/PrivateRoute';
+import NotFound from './pages/NotFound';
+// import AppRoutes from './routes';
 
-function App() {
+const App = () => {
+  const [isDarkTheme, setIsDarkTheme] = useState(() => {
+    const storedTheme = localStorage.getItem('theme');
+    return storedTheme ? JSON.parse(storedTheme) : true;
+  });
+
+  const handleThemeSwitch = () => {
+    const newIsDarkTheme = !isDarkTheme;
+    setIsDarkTheme(newIsDarkTheme);
+    localStorage.setItem('theme', JSON.stringify(newIsDarkTheme));
+  };
   return (
-    <BrowserRouter>
-      <AuthProvider>
-        <NavbarComponent />
-        <Routes>
-          {['/', '/home'].map((path, index) => (
-            <Route
-              key={index}
-              path={path}
-              element={<Home />}
-            />
-          ))}
-          <Route path='/signup' element={<SignUpPage />} />
-          <Route path='/login' element={<LoginPage />} />
-          <Route path='/forgot-password' element={<ForgotPasswordPage />} />
-          {/* Private Routes */}
-          <Route
-            path='/boards'
-            element={(
-              <PrivateRoute>
-                <BoardsPage />
-              </PrivateRoute>
-          )}
-          />
-
-          <Route
-            path='/:uid'
-            element={(
-              <PrivateRoute>
-                <ProfilePage />
-              </PrivateRoute>
-)}
-          />
-          <Route path='*' element={<NotFoundPage />} />
-        </Routes>
-        <Footer />
-      </AuthProvider>
-    </BrowserRouter>
+    <ThemeProvider theme={isDarkTheme ? theme.dark : theme.light}>
+      <BoardsProvider>
+        <Router>
+          <Navbar isDarkTheme={isDarkTheme} handleThemeSwitch={handleThemeSwitch} />
+          <Sidebar />
+          <Container>
+            <Routes>
+              <Route
+                path='/'
+                element={(
+                  <PrivateRoute>
+                    <Home />
+                  </PrivateRoute>
+                )}
+              />
+              <Route
+                path="/board/:id"
+                element={(
+                  <PrivateRoute>
+                    <Board />
+                  </PrivateRoute>
+                )}
+              />
+              <Route path="/register" element={<Register />} />
+              <Route path="/login" element={<Login />} />
+              <Route path="/*" element={<NotFound />} />
+            </Routes>
+          </Container>
+        </Router>
+        <GlobalStyle />
+      </BoardsProvider>
+    </ThemeProvider>
   );
-}
+};
 
 export default App;

@@ -9,17 +9,20 @@ module.exports = {
   output: {
     filename: 'bundle.[fullhash].js',
     path: path.resolve(__dirname, 'dist'),
+    publicPath: '/',
   },
   devtool: 'source-map',
   devServer: {
     historyApiFallback: true,
   },
   plugins: [
+
     new HtmlWebpackPlugin({
       template: './src/index.html',
     }),
     new EslintPlugin({ extensions: ['ts', 'tsx'] }),
     new FaviconsWebpackPlugin('src/assets/favicon.svg'),
+
   ],
   resolve: {
     modules: [__dirname, 'src', 'node_modules'],
