@@ -15,6 +15,7 @@ import Container from './components/Utils/Container';
 import Register from './pages/Register';
 import Login from './pages/Login';
 import BoardsProvider from './contexts/boardsContext';
+import PrivateRoute from './pages/PrivateRoute';
 // import AppRoutes from './routes';
 
 const App = () => {
@@ -36,8 +37,22 @@ const App = () => {
           <Sidebar />
           <Container>
             <Routes>
-              <Route path='/' element={<Home />} />
-              <Route path="/board/:id" element={<Board />} />
+              <Route
+                path='/'
+                element={(
+                  <PrivateRoute>
+                    <Home />
+                  </PrivateRoute>
+                )}
+              />
+              <Route
+                path="/board/:id"
+                element={(
+                  <PrivateRoute>
+                    <Board />
+                  </PrivateRoute>
+                )}
+              />
               <Route path="/register" element={<Register />} />
               <Route path="/login" element={<Login />} />
             </Routes>
