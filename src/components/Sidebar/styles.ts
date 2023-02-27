@@ -88,11 +88,55 @@ export const StyledSidebar = styled.aside<Props>`
     }
   }
 
-  .github {
-    position: absolute;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    bottom: 15px;
+  .team {
+    margin-top: auto;
+    // margin-left: 1.8rem;
+
+    > h3 {
+      font-size: 2rem;
+      text-align: center;
+    }
+
+    a {
+      display: flex;
+      align-items: center;
+      margin: .8rem;
+      border: 1px solid ${(props) => props.theme.utils.todoListBorder};
+      border-radius: 10px;
+      box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.1);
+      background: ${(props) => props.theme.backgroundColors.main};
+      font-size: ${(props) => props.theme.fontSizes.sm};
+      padding: 5px;
+      max-width: 200px;
+    }
+     > a > img {
+      height: 3rem;
+      width: 3rem;
+      filter: grayscale(-1);
+      margin-right: 1rem;
+    }
+  }
+
+  .school {
+    margin-top: auto;
+    margin-left: 1.8rem;
+    align-self: stretch;
+
+    > div {
+      width: 120px;
+      margin-bottom: 2rem;
+
+      img {
+        max-width: 100%;
+        filter: grayscale(80%) opacity(.5) drop-shadow(2px 2px 2px gray);
+        cursor: pointer;
+        transition: all .3s;
+      }
+
+      img:hover {
+        filter: opacity(1);
+        transform: scale(1.05);
+      }
+    }
   }
 `;

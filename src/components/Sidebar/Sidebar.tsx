@@ -2,8 +2,10 @@ import React, { useEffect, useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import Menu from 'src/assets/menu.png';
 import Close from 'src/assets/close.png';
+import SchoolIcon from 'src/assets/rs_school.svg';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { auth } from 'src/config/Firebase';
+import GithubIcon from 'src/assets/github.svg';
 import NewBoard from './NewBoard';
 import { StyledSidebar } from './styles';
 import Button from '../Utils/Button';
@@ -84,31 +86,48 @@ const Sidebar = () => {
             />
           </div>
         )}
-        <div className="github">
+        <div className="team">
+          <h3>Our Team</h3>
           <a
             href="https://github.com/Kubatbekkk"
             target="_blank"
             aria-label="visit Kubatbekkk github"
             rel="noreferrer"
           >
-            Kubat: React/typescript
+            <img src={GithubIcon} alt="dev-git" />
+            {' '}
+            Kubat: React/Typescript/
+            Firebase
           </a>
           <a
-            href="https://github.com/Kubatbekkk"
+            href="https://github.com/elMP"
             target="_blank"
-            aria-label="visit Kubatbekkk github"
+            aria-label="visit elMP github"
             rel="noreferrer"
           >
-            Elena: managing
+            <img src={GithubIcon} alt="dev-git" />
+            {' '}
+            Elena:  Create-repo/GH-Projects Board
           </a>
           <a
-            href="https://github.com/Kubatbekkk"
+            href="https://github.com/meloknaasfalte"
             target="_blank"
-            aria-label="visit Kubatbekkk github"
+            aria-label="visit meloknaasfalte github"
             rel="noreferrer"
           >
-            Vlad: design
+            <img src={GithubIcon} alt="dev-git" />
+            {' '}
+            Vlad: Design
           </a>
+        </div>
+
+        <div className="school">
+          <div>
+            <a href="https://rs.school/" target='_blank' rel="noreferrer">
+              <img src={SchoolIcon} alt="rs-school" />
+            </a>
+          </div>
+
         </div>
       </StyledSidebar>
     </>
