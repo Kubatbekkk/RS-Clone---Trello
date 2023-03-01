@@ -50,5 +50,10 @@ export const StyledSwitch = styled.div`
 
         }
     }
+    @media (max-width: 424px) {
+        span {
+            display: none;
+        }
+    }
 
 `;

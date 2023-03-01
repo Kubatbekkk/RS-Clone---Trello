@@ -56,8 +56,13 @@ export const StyledNavbar = styled.nav`
       margin-right: 5px;
     }
   }
-  @media (max-width: 500px) {
+  @media (max-width: 815px) {
     h1 {
+      display: none;
+    }
+  }
+  @media (max-width: 424px) {
+    p {
       display: none;
     }
   }
