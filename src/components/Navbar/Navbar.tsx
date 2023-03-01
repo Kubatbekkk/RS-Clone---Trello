@@ -39,11 +39,11 @@ const Navbar = ({ isDarkTheme, handleThemeSwitch }: ThemeProps): JSX.Element => 
   }, [getUsername]);
 
   useEffect(() => {
-    if (pathname.slice(0, 6) === '/board') setActualPage('Your tasks');
+    if (pathname.slice(0, 6) === '/board' && user) setActualPage('Your tasks');
     if (pathname.slice(0, 6) === '/login') setActualPage('Login');
     if (pathname.slice(0, 9) === '/register') setActualPage('Register');
     if (pathname === '/') setActualPage('Boards');
-  }, [pathname]);
+  }, [pathname, user]);
 
   return (
     <>
