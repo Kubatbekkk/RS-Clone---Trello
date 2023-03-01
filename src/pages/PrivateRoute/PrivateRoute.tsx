@@ -5,11 +5,11 @@ import { Navigate } from 'react-router-dom';
 import { auth } from 'src/config/Firebase';
 
 const PrivateRoute = ({ children }: { children: ReactNode }) => {
-  const [user] = useAuthState(auth);
-  const checkUser = async () => {
-    await user;
-  };
-  if (!checkUser()) {
+  const [user, loading] = useAuthState(auth);
+
+  if (loading) return null;
+
+  if (!user) {
     return <Navigate to='/login' />;
   }
 

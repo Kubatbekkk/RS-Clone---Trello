@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useContext, useEffect, useState } from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
-import { useNavigate } from 'react-router-dom';
+// import { useNavigate } from 'react-router-dom';
 import EmptyImage from 'src/components/Utils/EmptyImage';
 import Loading from 'src/components/Utils/Loading';
 import { BoardsGrid, BoardsGridItem } from '../../components/BoardsGrid';
@@ -15,7 +15,6 @@ const Home = () => {
   const { boards, getBoards } = useContext(BoardsContext);
 
   const [user] = useAuthState(auth);
-  const navigate = useNavigate();
 
   useEffect(() => {
     setLoading(true);
@@ -23,9 +22,6 @@ const Home = () => {
   }, [user]);
 
   useEffect(() => {
-    if (!user) {
-      navigate('/login');
-    }
     if (user) {
       setLoading(true);
       // eslint-disable-next-line func-names

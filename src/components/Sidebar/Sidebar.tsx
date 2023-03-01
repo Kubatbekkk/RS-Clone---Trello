@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import Menu from 'src/assets/menu.png';
 import Close from 'src/assets/close.png';
@@ -20,11 +20,29 @@ const Sidebar = () => {
 
   const location = useLocation();
   const navigate = useNavigate();
+  const sidebarRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const handleOutsideClick = (event: MouseEvent) => {
+      if (sidebarRef.current && !sidebarRef.current.contains(event.target as Node)) {
+        setIsOpen(false);
+      }
+    };
+    document.addEventListener('mousedown', handleOutsideClick);
+    return () => {
+      document.removeEventListener('mousedown', handleOutsideClick);
+    };
+  }, []);
 
   useEffect(() => {
     setIsOpen(false);
     setIsNewBoardOpen(false);
   }, [location]);
+
+  const createNewBoard = () => {
+    setIsOpen(false);
+    setIsNewBoardOpen(true);
+  };
 
   return (
     <>
@@ -45,6 +63,7 @@ const Sidebar = () => {
       <StyledSidebar
         isOpen={isOpen}
         className={`${isOpen ? 'openedAnimation' : ''}`}
+        ref={sidebarRef}
       >
         <div>
           <Link to="/" aria-label="go to home">
@@ -63,7 +82,7 @@ const Sidebar = () => {
           <>
             <BoardsList />
             <Button
-              onClick={() => setIsNewBoardOpen(true)}
+              onClick={createNewBoard}
               text="+ Add New Board"
               height="50px"
               width="85%"

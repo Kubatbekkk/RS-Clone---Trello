@@ -14,6 +14,7 @@ import Sidebar from './components/Sidebar';
 import Container from './components/Utils/Container';
 import Register from './pages/Register';
 import Login from './pages/Login';
+import Profile from './pages/Profile';
 import BoardsProvider from './contexts/boardsContext';
 import PrivateRoute from './pages/PrivateRoute';
 import NotFound from './pages/NotFound';
@@ -54,9 +55,18 @@ const App = () => {
                   </PrivateRoute>
                 )}
               />
+              <Route
+                path="/profile"
+                element={(
+                  <PrivateRoute>
+                    <Profile />
+                  </PrivateRoute>
+                )}
+              />
               <Route path="/register" element={<Register />} />
               <Route path="/login" element={<Login />} />
               <Route path="/*" element={<NotFound />} />
+
             </Routes>
           </Container>
         </Router>
