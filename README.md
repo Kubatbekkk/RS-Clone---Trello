@@ -14,9 +14,9 @@ Additionally, the use of TypeScript and Eslint ensures code quality and consiste
 
 #### Getting Started
 To get started with this project, you can clone the repository and install the dependencies:<br />
-`git@github.com:Kubatbekkk/RS-Clone---Trello.git<br />
-cd RS-Kanban<br />
-npm install`
+`git@github.com:Kubatbekkk/RS-Clone---Trello.git`<br />
+`cd RS-Kanban`<br />
+`npm install`
 
 You will also need to create a Firebase project and add the necessary configuration details to the src/config/Firebase.ts file.
 
