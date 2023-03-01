@@ -13,7 +13,7 @@ Additionally, the use of TypeScript and Eslint ensures code quality and consiste
 6. Firebase
 
 #### Getting Started
-To get started with this project, you can clone the repository and install the dependencies:
+To get started with this project, you can clone the repository and install the dependencies:<br />
 `git clone https://github.com/username/RS-Kanban.git
 cd RS-Kanban
 npm install`
