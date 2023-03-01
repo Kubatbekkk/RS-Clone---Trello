@@ -56,4 +56,9 @@ export const StyledNavbar = styled.nav`
       margin-right: 5px;
     }
   }
+  @media (max-width: 500px) {
+    h1 {
+      display: none;
+    }
+  }
 `;

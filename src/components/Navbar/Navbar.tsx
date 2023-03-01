@@ -63,10 +63,11 @@ const Navbar = ({ isDarkTheme, handleThemeSwitch }: ThemeProps): JSX.Element => 
         <div>
           {actualPage === 'Your tasks' && (
             <Button
-              text="+ Add task"
+              text="+ Task"
               height="40px"
               width="90px"
               onClick={() => setOpenNewTask(true)}
+              pulsing
             />
           )}
 

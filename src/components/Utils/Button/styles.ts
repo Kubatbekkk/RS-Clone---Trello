@@ -19,7 +19,7 @@ export const StyledButton = styled.button<Props>`
 
   color: ${(props) => props.theme.textColors.primary};
   font-size: ${(props) => props.theme.fontSizes.md};
-  font-family: "Poppins", sans-serif;
+  font-family: "Montserrat", sans-serif;
   cursor: pointer;
 
   transition: background 0.2s;
@@ -31,6 +31,10 @@ export const StyledButton = styled.button<Props>`
   }
 
   animation: ${(props) => (props.pulsing ? 'pulsingAnimation 0.8s infinite' : 'none')};
+
+  @media (max-width: 815px) {
+    font-size: ${(props) => props.theme.fontSizes.sm};
+  }
 
   @keyframes pulsingAnimation {
     0% {
